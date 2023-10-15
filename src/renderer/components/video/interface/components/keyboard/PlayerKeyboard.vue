@@ -68,8 +68,10 @@ export default {
       if (e.code === 'KeyF') this.$emit('toggle:fullscreen') // F -> fullscreen
 
       // Seek
-      if (e.which === 39 || e.code === 'MediaTrackNext') toVideo(this.release, this.next, {fromStart: true})
-      if (e.which === 37 || e.code === 'MediaTrackPrevious') toVideo(this.release, this.previous, {fromStart: true})
+      if (e.which === 39) this.forward() // right arrow -> forward
+      if (e.which === 37) this.rewind() // left arrow -> rewind
+      if (e.code === 'MediaTrackNext') toVideo(this.release, this.next, {fromStart: true})
+      if (e.code === 'MediaTrackPrevious') toVideo(this.release, this.previous, {fromStart: true})
 
       // Volume
       if (e.which === 38 || e.code === 'VolumeUp') {
@@ -80,6 +82,7 @@ export default {
           this.$emit('set:volume', newVolume)
         }
       } // up arrow -> inc vol
+
       if (e.which === 40 || e.code === 'VolumeDown') {
         if (this.player.volume <= 0.05) {
           this.$emit('set:volume', 0)

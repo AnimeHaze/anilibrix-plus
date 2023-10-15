@@ -1,6 +1,6 @@
 {
   "name": "anilibrix",
-  "version": "v1.4.3-ext.5",
+  "version": "v1.4.3-ext.6",
   "author": {
     "name": "Anilibria",
     "email": "anilibria@protonmail.com",
@@ -188,7 +188,7 @@
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.3",
     "vuex-persistedstate": "^3.0.1",
-    "webtorrent": "^0.107.17"
+    "webtorrent": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
