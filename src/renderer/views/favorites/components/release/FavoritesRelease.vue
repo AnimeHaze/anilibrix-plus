@@ -19,6 +19,7 @@
               <!-- Status -->
               <div v-if="status || rating" class="d-flex justify-space-between mt-auto py-2">
                 <v-chip
+                  v-if="rating"
                   color="secondary"
                   text-color="white"
                   small
