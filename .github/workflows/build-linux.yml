@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: Install multilib
-        run: apt-get -y install gcc-multilib g++-multilib
+        run: sudo apt-get -y install gcc-multilib g++-multilib
 
       - name: Cache Electron
         uses: actions/cache@v1
