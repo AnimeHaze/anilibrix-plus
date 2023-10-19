@@ -34,6 +34,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: patch node gyp on windows to support Visual Studio 2019
+        shell: powershell
+        run: |
+          npm install --global node-gyp@latest
+          npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
+
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
