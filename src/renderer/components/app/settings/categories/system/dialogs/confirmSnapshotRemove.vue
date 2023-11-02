@@ -59,7 +59,6 @@ export default {
           'x-session': this._session
         }
       })
-        .then(e => e.json())
         .then(({ success, error }) => {
           if (success) {
             return this.$emit('fetchSnapshots')

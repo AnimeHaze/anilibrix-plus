@@ -1,5 +1,8 @@
 const RPC = require('discord-rpc')
 
+const logs = !!process.env.DISCORD_RICH_PRESENCE_DEBUG
+const logger = logs ? console.log : () => {}
+
 export function discordActivity () {
   let client
   let closed = false
@@ -7,13 +10,13 @@ export function discordActivity () {
   const assembleClient = (timeout = 5000, old = true) => {
     if (old && client !== null && client.transport.socket !== null) client.destroy()
     client = new RPC.Client({ transport: 'ipc' })
-    client.on('error', (err) => console.log(err))
+    client.on('error', (err) => logger(err))
     client.on('ready', () => {
-      console.log('Discord rich presence ready')
+      logger('Discord rich presence ready')
 
       client.transport.socket.on('close', () => {
         if (closed) return
-        console.log('Discord rich presence reconnect')
+        logger('Discord rich presence reconnect')
         assembleClient()
       })
     })
@@ -22,9 +25,9 @@ export function discordActivity () {
       try {
         await client.login({ clientId: process.env.DISCORD_CLIENT_ID })
       } catch (e) {
-        console.log(e)
+        logger(e)
         setTimeout(() => {
-          console.log('Discord rich presence reconnect')
+          logger('Discord rich presence reconnect')
           assembleClient()
         }, 5000)
       }
@@ -35,7 +38,7 @@ export function discordActivity () {
 
   process.on('unhandledRejection', (e) => {
     if (e.message === 'Could not connect') {
-      console.log('Discord rich presence: Could not connect ! Retrying...')
+      logger('Discord rich presence: Could not connect ! Retrying...')
       assembleClient()
     } else {
       throw e
@@ -47,8 +50,8 @@ export function discordActivity () {
   const interval = setInterval(() => {
     if (client && client.transport.socket) {
       client.setActivity(activity)
-        .then(() => console.log('Discord set activity', activity))
-        .catch(err => console.log('Discord set activity error', err))
+        .then(() => logger('Discord set activity', activity))
+        .catch(err => logger('Discord set activity error', err))
     }
   }, 2000)
 

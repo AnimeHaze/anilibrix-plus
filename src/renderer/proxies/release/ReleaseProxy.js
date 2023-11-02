@@ -1,4 +1,5 @@
 import BaseProxy from '@proxies/BaseProxy'
+import { catGirlFetch } from '@utils/fetch'
 
 export default class ReleaseProxy extends BaseProxy {
   /**
@@ -37,6 +38,14 @@ export default class ReleaseProxy extends BaseProxy {
       headers: data.getHeaders(), ...parameters
     }
     const response = await this.submit('POST', this.getApiEndpoint(), params)
+    const { playlist } = response.data.data
+    for (const ep in playlist) {
+      if (playlist[ep].sources.is_rutube) {
+        playlist[ep].fullhd = await catGirlFetch(`https://rutube.ru/api/play/options/${playlist[ep].rutube_id}/?no_404=true&referer&pver=v2`)
+          .then(x => x.video_balancer.m3u8)
+          .catch(x => console.log(x))
+      }
+    }
 
     return this.handleResponse(response.data)
   }

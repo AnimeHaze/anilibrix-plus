@@ -50,6 +50,14 @@ app.commandLine.appendSwitch('disable-site-isolation-trials')
 app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
 app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 
+process.on('uncaughtException', error => {
+  console.log('Unhandled Error', error)
+})
+
+process.on('unhandledRejection', error => {
+  console.log('Unhandled Promise Rejection', error);
+})
+
 // Close app on all windows closed (relevant for mac users)
 app.on('window-all-closed', () => {
   destroyRichPresence()

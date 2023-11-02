@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-2022]
         node-version: [14.x]
 
     env:
@@ -33,6 +33,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: patch node gyp on windows to support Visual Studio 2019
+        shell: powershell
+        run: |
+          npm install --global node-gyp@latest
+          npm prefix -g | % {npm config set node_gyp "$_\node_modules\node-gyp\bin\node-gyp.js"}
 
       - name: Get yarn cache
         id: yarn-cache
@@ -72,4 +78,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: Save artifacts
-          path: release/*.exe
+          path: |
+            release/*.exe
+            release/win-arm64-unpacked
+            release/win-unpacked
+            release/win-ia32-unpacked

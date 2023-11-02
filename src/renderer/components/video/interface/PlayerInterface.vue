@@ -317,7 +317,6 @@ export default {
         const rId = this.$__get(this.release, 'id')
 
         const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
-          .then(x => x.json())
 
         const serie = playlist.playlist.find(x => x.serie === epId)
 

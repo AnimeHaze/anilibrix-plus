@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest]
         node-version: [14.x]
 
     env:
@@ -46,6 +46,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Install multilib
+        run: sudo apt-get -y install gcc-multilib g++-multilib
+
       - name: Cache Electron
         uses: actions/cache@v1
         with:
@@ -66,7 +69,7 @@ jobs:
         run: yarn
 
       - name: Run build
-        run: npm run release:windows
+        run: npm run release:linux
 
       - name: Archive results
         uses: actions/upload-artifact@v3
@@ -75,4 +78,6 @@ jobs:
           path: |
             release/*.snap
             release/*.AppImage
-            
+            release/linux-arm64-unpacked
+            release/linux-unpacked
+            release/linux-ia32-unpacked

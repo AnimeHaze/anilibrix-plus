@@ -111,7 +111,6 @@ export default {
           }
         })
       })
-        .then(e => e.json())
         .then(({
           data,
           success,
