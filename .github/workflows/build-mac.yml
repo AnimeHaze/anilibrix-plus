@@ -24,6 +24,8 @@ jobs:
       STATIC_ENDPOINT_URL: ${{ secrets.STATIC_ENDPOINT_URL }}
       DISCORD_CLIENT_ID: ${{ secrets.DISCORD_CLIENT_ID }}
       EXT_API_SERVER: ${{ secrets.EXT_API_SERVER }}
+      PYTHON: python3.10
+      NODE_GYP_FORCE_PYTHON: python3.10
 
     steps:
       - name: Check out Git repository
@@ -61,6 +63,12 @@ jobs:
           key: ${{ runner.os }}-electron-builder-cache-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
           restore-keys: |
             ${{ runner.os }}-electron-builder-cache-
+
+      - name: Remove other python
+        run: sudo rm -rf /System/Library/Frameworks/Python.framework/
+
+      - name: Install python@3.10
+        run: brew install python@3.10
 
       - name: Install dependencies
         run: yarn
