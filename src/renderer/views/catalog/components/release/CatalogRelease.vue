@@ -16,6 +16,7 @@
           <favorite v-bind="{release}"/>
           <v-chip v-text="year" label color="grey darken-4" :style="{height: '36px'}"/>
           <v-chip v-text="type" label color="grey darken-4" :style="{height: '36px'}"/>
+          <v-chip v-if="status" v-text="status" label color="grey darken-4" :style="{height: '36px'}"/>
         </v-card-text>
 
         <!-- Description -->
@@ -120,6 +121,15 @@ export default {
      */
     episodes () {
       return this.$__get(this.release, 'episodes') || []
+    },
+
+    /**
+     * Get release status
+     *
+     * @return {*}
+     */
+    status () {
+      return this.$__get(this.release, 'status')
     }
 
   }
