@@ -126,6 +126,7 @@ export default {
       video: null,
       visible: true,
       visible_handler: null,
+      endingSkiped: false,
       openingSkiped: false,
       keysDown: []
     }
@@ -270,7 +271,7 @@ export default {
         }
 
         if (this.keysDown.length && !['ControlLeft'].includes(this.keysDown.toString())) {
-          if (this._auto_opening_skip_key !== '' && this._opening_skip_button_key === this.keysDown.join('+')) {
+          if (this._opening_skip_button_key !== '' && this._opening_skip_button_key === this.keysDown.join('+')) {
             this.setTime(this.player.currentTime + (this._opening_skip_time || 0))
           }
 
@@ -313,29 +314,44 @@ export default {
     document.addEventListener('keydown', this.handleKeyDown)
 
     try {
-        const epId = this.$__get(this.episode, 'id')
-        const rId = this.$__get(this.release, 'id')
+      const epId = this.$__get(this.episode, 'id')
+      const rId = this.$__get(this.release, 'id')
 
-        const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
+      const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
 
-        const serie = playlist.playlist.find(x => x.serie === epId)
+      const serie = playlist.playlist.find(x => x.serie === epId)
 
-        if (serie) {
-          const [start, end] = serie.skips.opening
-          this.player.on('timeupdate', () => {
-            if (this._auto_opening_skip) {
-              if (!this.openingSkiped) this.openingSkiped = true
+      if (serie) {
+        const opening = serie.skips.opening
+        const ending = serie.skips.ending
+        this.player.on('timeupdate', () => {
+          if (this._auto_opening_skip) {
+            if (!this.openingSkiped) {
               const time = Math.floor(this.player.currentTime)
-              if (start && time === start) {
+              if (opening[0] <= time && time <= opening[1]) {
                 this.$toasted.show('Опенинг пропущен', {
                   type: 'info',
                   position: 'top-center'
                 })
-                this.setTime(end)
+                this.setTime(opening[1])
+                this.openingSkiped = true
               }
             }
-          })
-        }
+
+            if (!this.endingSkiped) {
+              const time = Math.floor(this.player.currentTime)
+              if (ending[0] <= time && time <= ending[1]) {
+                this.$toasted.show('Эндинг пропущен', {
+                  type: 'info',
+                  position: 'top-center'
+                })
+                this.setTime(ending[1])
+                this.endingSkiped = true
+              }
+            }
+          }
+        })
+      }
     } catch (e) {
       console.log(e)
     }
