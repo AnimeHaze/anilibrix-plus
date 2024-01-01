@@ -6,7 +6,7 @@
     "email": "anilibria@protonmail.com",
     "url": "https://anilibria.tv"
   },
-  "description": "AniLibrix - AniLibria desktop app",
+  "description": "AniLibrix Plus - AniLibria desktop app (Anilibrix fork)",
   "license": "MIT",
   "main": "./dist/electron/main.js",
   "repository": {
@@ -33,7 +33,7 @@
     }
   },
   "build": {
-    "productName": "AniLibrix",
+    "productName": "AniLibrix Plus",
     "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
     "appId": "com.anilibria.anilibrix",
     "directories": {
