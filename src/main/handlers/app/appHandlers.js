@@ -6,9 +6,13 @@ import axios from 'axios'
 import axiosRetry from 'axios-retry';
 
 axiosRetry(axios, {
-  retryDelay: 1500,
+  retryDelay: () => 1500,
   retries: 10,
-  retryCondition: () => true
+  retryCondition: function (response) {
+    if (response.status === 404) return false
+
+    return axiosRetry.isNetworkOrIdempotentRequestError(response)
+  }
 })
 
 const { shell } = require('electron')
