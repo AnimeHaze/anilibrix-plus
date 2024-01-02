@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- Main Interface Components -->
     <v-slide-y-reverse-transition>
       <v-layout v-show="visible" column class="interface pa-8 pt-0">
@@ -51,6 +50,9 @@
       @toggle:fullscreen="toggleFullscreen">
     </player-keyboard>
 
+    <template v-if="_auto_opening_skip" v-for="skip in skips">
+      <player-skip v-bind="{player, isInterfaceVisible: visible, ...skip}" @set:time="setTime"/>
+    </template>
     <player-next v-bind="{player, release, episode}"/>
     <player-mouse v-bind="{player}" @set:volume="setVolume"/>
     <player-label v-bind="{player}" :key="`label:${episode.id}:${source.label}`"/>
@@ -63,6 +65,7 @@
 
 <script>
 
+import PlayerSkip from './components/skip'
 import PlayerPlay from './components/play'
 import PlayerNext from './components/next'
 import PlayerLabel from './components/label'
@@ -107,6 +110,7 @@ export default {
     AppKeyboardHandlerMixin,
   ],
   components: {
+    PlayerSkip,
     PlayerPlay,
     PlayerNext,
     PlayerLinks,
@@ -126,9 +130,8 @@ export default {
       video: null,
       visible: true,
       visible_handler: null,
-      endingSkiped: false,
-      openingSkiped: false,
-      keysDown: []
+      keysDown: [],
+      skips: []
     }
   },
 
@@ -316,41 +319,15 @@ export default {
     try {
       const epId = this.$__get(this.episode, 'id')
       const rId = this.$__get(this.release, 'id')
-
       const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
-
       const serie = playlist.playlist.find(x => x.serie === epId)
 
       if (serie) {
-        const opening = serie.skips.opening
-        const ending = serie.skips.ending
-        this.player.on('timeupdate', () => {
-          if (this._auto_opening_skip) {
-            if (!this.openingSkiped) {
-              const time = Math.floor(this.player.currentTime)
-              if (opening[0] <= time && time <= opening[1]) {
-                this.$toasted.show('Опенинг пропущен', {
-                  type: 'info',
-                  position: 'top-center'
-                })
-                this.setTime(opening[1])
-                this.openingSkiped = true
-              }
-            }
-
-            if (!this.endingSkiped) {
-              const time = Math.floor(this.player.currentTime)
-              if (ending[0] <= time && time <= ending[1]) {
-                this.$toasted.show('Эндинг пропущен', {
-                  type: 'info',
-                  position: 'top-center'
-                })
-                this.setTime(ending[1])
-                this.endingSkiped = true
-              }
-            }
+        Object.values(serie.skips).forEach(skip => {
+          if(skip.length === 2) {
+            this.skips.push({start: skip[0], end: skip[1]})
           }
-        })
+        });
       }
     } catch (e) {
       console.log(e)
