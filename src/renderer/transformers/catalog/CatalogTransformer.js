@@ -1,5 +1,6 @@
 import stripHtml from 'string-strip-html'
 import BaseTransformer from '@transformers/BaseTransformer'
+import humanFormat from 'human-format'
 
 export default class CatalogTransformer extends BaseTransformer {
   /**
@@ -19,7 +20,11 @@ export default class CatalogTransformer extends BaseTransformer {
       },
       poster: this.get(release, 'poster'),
       genres: this.get(release, 'genres') || [],
-      description: this._stripHtml(this.get(release, 'description'))
+      description: this._stripHtml(this.get(release, 'description')),
+
+      status: this.get(release, 'status'),
+      statusCode: this.get(release, 'statusCode'),
+      favoriteRating: this._getFavoriteRating(release)
     }
   }
 
@@ -32,5 +37,11 @@ export default class CatalogTransformer extends BaseTransformer {
    */
   _stripHtml (value) {
     return value ? stripHtml(value) : null
+  }
+
+  _getFavoriteRating (release) {
+    const rating = this.get(release, 'favorite.rating')
+
+    return { count: rating, text: humanFormat(rating) }
   }
 }

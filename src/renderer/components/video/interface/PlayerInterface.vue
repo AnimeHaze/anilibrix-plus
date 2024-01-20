@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- Main Interface Components -->
     <v-slide-y-reverse-transition>
       <v-layout v-show="visible" column class="interface pa-8 pt-0">
@@ -51,6 +50,9 @@
       @toggle:fullscreen="toggleFullscreen">
     </player-keyboard>
 
+    <template v-if="_auto_opening_skip" v-for="skip in skips">
+      <player-skip v-bind="{player, isInterfaceVisible: visible, ...skip}" @set:time="setTime"/>
+    </template>
     <player-next v-bind="{player, release, episode}"/>
     <player-mouse v-bind="{player}" @set:volume="setVolume"/>
     <player-label v-bind="{player}" :key="`label:${episode.id}:${source.label}`"/>
@@ -63,6 +65,7 @@
 
 <script>
 
+import PlayerSkip from './components/skip'
 import PlayerPlay from './components/play'
 import PlayerNext from './components/next'
 import PlayerLabel from './components/label'
@@ -107,6 +110,7 @@ export default {
     AppKeyboardHandlerMixin,
   ],
   components: {
+    PlayerSkip,
     PlayerPlay,
     PlayerNext,
     PlayerLinks,
@@ -126,8 +130,8 @@ export default {
       video: null,
       visible: true,
       visible_handler: null,
-      openingSkiped: false,
-      keysDown: []
+      keysDown: [],
+      skips: []
     }
   },
 
@@ -270,7 +274,7 @@ export default {
         }
 
         if (this.keysDown.length && !['ControlLeft'].includes(this.keysDown.toString())) {
-          if (this._auto_opening_skip_key !== '' && this._opening_skip_button_key === this.keysDown.join('+')) {
+          if (this._opening_skip_button_key !== '' && this._opening_skip_button_key === this.keysDown.join('+')) {
             this.setTime(this.player.currentTime + (this._opening_skip_time || 0))
           }
 
@@ -313,29 +317,18 @@ export default {
     document.addEventListener('keydown', this.handleKeyDown)
 
     try {
-        const epId = this.$__get(this.episode, 'id')
-        const rId = this.$__get(this.release, 'id')
+      const epId = this.$__get(this.episode, 'id')
+      const rId = this.$__get(this.release, 'id')
+      const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
+      const serie = playlist.playlist.find(x => x.serie === epId)
 
-        const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
-
-        const serie = playlist.playlist.find(x => x.serie === epId)
-
-        if (serie) {
-          const [start, end] = serie.skips.opening
-          this.player.on('timeupdate', () => {
-            if (this._auto_opening_skip) {
-              if (!this.openingSkiped) this.openingSkiped = true
-              const time = Math.floor(this.player.currentTime)
-              if (start && time === start) {
-                this.$toasted.show('Опенинг пропущен', {
-                  type: 'info',
-                  position: 'top-center'
-                })
-                this.setTime(end)
-              }
-            }
-          })
-        }
+      if (serie) {
+        Object.values(serie.skips).forEach(skip => {
+          if(skip.length === 2) {
+            this.skips.push({start: skip[0], end: skip[1]})
+          }
+        });
+      }
     } catch (e) {
       console.log(e)
     }

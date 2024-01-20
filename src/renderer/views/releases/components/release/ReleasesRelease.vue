@@ -12,7 +12,8 @@
       <!-- Favorite action -->
       <v-layout class="my-3">
         <favorite v-bind="{release}" class="mr-1"/>
-        <v-chip v-text="episode.title" label color="secondary" class="font-weight-black" :style="{height: '36px'}"/>
+        <v-chip v-text="episode.title" label color="secondary" class="font-weight-black mr-1" :style="{height: '36px'}"/>
+        <v-chip v-text="type" label color="grey darken-4" :style="{height: '36px'}"/>
       </v-layout>
 
       <!-- Description -->
@@ -86,6 +87,15 @@ export default {
      */
     description () {
       return this.$__get(this.release, 'description')
+    },
+
+    /**
+    * Get release type
+    *
+    * @return {*}
+    */
+    type () {
+      return this.$__get(this.release, 'type')
     }
 
   }
