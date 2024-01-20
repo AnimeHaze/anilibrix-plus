@@ -40,6 +40,7 @@
     <v-tabs v-if="!loading" v-model="tab" class="shrink mb-4" background-color="transparent">
       <v-tab>Эпизоды</v-tab>
       <v-tab>Комментарии</v-tab>
+      <v-tab v-if="torrents.length > 0">Torrents</v-tab>
     </v-tabs>
 
     <!-- Release Components -->
@@ -53,6 +54,7 @@
 import Card from '@components/release/card'
 import Episodes from '@components/release/episodes'
 import Comments from '@components/release/comments'
+import Torrents from '@components/release/torrents'
 
 import { toVideo } from '@utils/router/views'
 import { mapState } from 'vuex'
@@ -139,6 +141,17 @@ export default {
     },
 
     /**
+     * Get release torrents
+     *
+     * @return {array}
+     */
+    torrents () {
+      if (!this._release) return []
+
+      return this.$__get(this._release, 'torrents', [])
+    },
+
+    /**
      * Get available components
      *
      * @return {array}
@@ -157,6 +170,10 @@ export default {
         {
           is: Comments,
           props: { release: this._release }
+        },
+        {
+          is: Torrents,
+          props: { torrents: this.torrents }
         }
       ]
     },
