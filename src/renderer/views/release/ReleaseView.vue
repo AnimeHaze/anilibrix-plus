@@ -40,7 +40,7 @@
     <v-tabs v-if="!loading" v-model="tab" class="shrink mb-4" background-color="transparent">
       <v-tab>Эпизоды</v-tab>
       <v-tab>Комментарии</v-tab>
-      <v-tab v-if="torrents.length > 0">Torrents</v-tab>
+      <v-tab v-if="torrents.length > 0">Торренты</v-tab>
     </v-tabs>
 
     <!-- Release Components -->
