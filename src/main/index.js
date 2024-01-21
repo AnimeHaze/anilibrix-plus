@@ -14,7 +14,19 @@ import { Main, Torrent } from './utils/windows'
 import { autoUpdater } from 'electron-updater'
 
 // App Handlers
-import { catchAppAboutEvent, catchAppDevtoolsMainEvent, catchAppDevtoolsTorrentEvent, catchAppDockNumberEvent, catchDisableSystemSleepBlockerEvent, catchEnableSystemSleepBlockerEvent, handleRand, handleRichPresense, handleSafeStorageEncrypt, handleShowConfig } from '@main/handlers/app/appHandlers'
+import {
+  catchAppAboutEvent,
+  catchAppDevtoolsMainEvent,
+  catchAppDevtoolsTorrentEvent,
+  catchAppDockNumberEvent,
+  catchDisableSystemSleepBlockerEvent,
+  catchEnableSystemSleepBlockerEvent,
+  handleRand,
+  handleRichPresense,
+  handleSafeStorageEncrypt,
+  handleShowConfig,
+  handleTorrentParse
+} from '@main/handlers/app/appHandlers'
 
 // Torrent Handlers
 import { broadcastTorrentEvents } from '@main/handlers/torrents/torrentsHandler'
@@ -141,6 +153,7 @@ const appHandlers = () => {
   handleRichPresense(setActivity)
   handleRand()
   handleShowConfig()
+  handleTorrentParse()
 }
 
 /**

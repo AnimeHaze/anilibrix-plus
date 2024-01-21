@@ -28,7 +28,7 @@ export function catGirlFetch (url, init = {}) {
 
       return x
     })
-    .then(x => x.json())
+    .then(x => init.raw ? x : x.json())
     .catch(err => {
       if (err.status === 404) throw err
 

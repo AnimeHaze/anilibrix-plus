@@ -2405,6 +2405,7 @@ __metadata:
     cfonts: ^2.1.2
     chalk: ^3.0.0
     chromecast-api: ^0.3.3
+    content-disposition-attachment: ^0.3.1
     copy-webpack-plugin: ^5.1.1
     cross-env: ^7.0.0
     css-loader: ^3.4.2
@@ -5741,6 +5742,13 @@ __metadata:
   version: 1.0.0
   resolution: "constants-browserify@npm:1.0.0"
   checksum: f7ac8c6d0b6e4e0c77340a1d47a3574e25abd580bfd99ad707b26ff7618596cf1a5e5ce9caf44715e9e01d4a5d12cb3b4edaf1176f34c19adb2874815a56e64f
+  languageName: node
+  linkType: hard
+
+"content-disposition-attachment@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "content-disposition-attachment@npm:0.3.1"
+  checksum: 77217ef619e36e32be1d530073ff614df2b39a008ac5bac05fcaf9a01e897d3d5125cd522a71e5149776ca7220af92def15ebed1d1678527693f79e66581dbbc
   languageName: node
   linkType: hard
 

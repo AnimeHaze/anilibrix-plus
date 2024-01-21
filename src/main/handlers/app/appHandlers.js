@@ -4,7 +4,11 @@ import { start as startSystemSleepBlocker, stop as stopSystemSleepBlocker } from
 import { setEncrypted } from '@main/utils/safeStorage'
 import axios from 'axios'
 import axiosRetry from 'axios-retry';
-
+import parseTorrent from 'parse-torrent';
+import fs from 'fs';
+import qs from 'querystring';
+import { catGirlFetch } from '@utils/fetch';
+import { parse } from 'content-disposition-attachment';
 axiosRetry(axios, {
   retryDelay: () => 1500,
   retries: 10,
@@ -33,6 +37,8 @@ export const APP_SHOW_CONFIG = 'app:show_config'
 export const APP_CHECK_API_ENDPOINT = 'app:check_api_endpoint'
 
 export const APP_RAND = 'app:rand'
+
+export const APP_TORRENT_PARSE = 'app:torrent_parse'
 
 /**
  * Send app about event
@@ -229,6 +235,31 @@ export const handleRand = () => {
       }
       throw e
     }
+  })
+}
 
+export const invokeTorrentParse = (url) => ipcRenderer.invoke(APP_TORRENT_PARSE, url)
+
+export const handleTorrentParse = () => {
+  ipcMain.handle(APP_TORRENT_PARSE, async (event, url) => {
+    const { file, name } = await catGirlFetch(url, { raw: true })
+      .then(async x => {
+        return {
+          name: parse(x.headers.get('content-disposition')).filename || 'unknown.torrent',
+          file: Buffer.from(await x.arrayBuffer())
+        }
+      })
+
+    const data = parseTorrent(file);
+
+    return {
+      file: file.toString('base64'),
+      name,
+      magnet: 'magnet:?' + qs.stringify({
+        xt: `urn:btih:${data.infoHash}`,
+        dn: data.name,
+        tr: data.announce
+      })
+    }
   })
 }
