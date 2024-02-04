@@ -29,7 +29,7 @@
       "donate": "https://www.anilibria.tv/pages/donate.php",
       "telegram": "tg://resolve?domain=anilibrix",
       "anilibria": "https://anilibria.tv",
-      "unofficial": "tg://resolve?domain=anilibrixUnoffical"
+      "unofficial": "tg://resolve?domain=anilibrix_plus"
     }
   },
   "build": {
@@ -141,6 +141,7 @@
     "axios": "^0.19.2",
     "axios-retry": "^3.5.1",
     "chromecast-api": "^0.3.3",
+    "content-disposition-attachment": "^0.3.1",
     "debug": "^4.3.4",
     "discord-rpc": "^4.0.1",
     "electron-dl": "^3.0.1",
