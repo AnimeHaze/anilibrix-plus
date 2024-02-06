@@ -1,7 +1,7 @@
 <template>
   <div class="ma-4">
     <v-layout align-center>
-      <v-skeleton-loader boilerplate type="avatar" height="220" width="220" class="mr-8"/>
+      <v-skeleton-loader boilerplate type="button" height="285" width="200" class="mr-3"/>
       <v-layout column>
 
         <v-skeleton-loader boilerplate type="heading" height="40" width="70%"/>

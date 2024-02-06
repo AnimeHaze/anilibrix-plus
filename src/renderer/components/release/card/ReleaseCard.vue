@@ -7,9 +7,11 @@
       <v-layout align-center class="my-4">
 
         <!-- Poster -->
-        <v-avatar size="220" class="mx-4">
-          <v-img :src="poster" aspect-ratio="1"/>
-        </v-avatar>
+        <img
+          class="mx-4 rounded-lg"
+          :src="poster"
+          style="max-width: 200px;"
+        >
 
         <!-- Title -->
         <!-- Original Name + Genres -->
