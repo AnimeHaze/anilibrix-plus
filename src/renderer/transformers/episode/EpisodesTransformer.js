@@ -148,6 +148,8 @@ export default class EpisodesTransformer extends BaseTransformer {
       // Set episode data
       episodes[episode].id = episode
       episodes[episode].title = this.get(item, 'title')
+      episodes[episode].name = this.get(item, 'name')
+      episodes[episode].updated_at = this.get(item, 'updated_at')
 
       // Push sources
       if (fhdSource.payload.playlist) episodes[episode].sources.push(fhdSource)

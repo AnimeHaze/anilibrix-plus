@@ -81,12 +81,17 @@ export default {
      */
     title () {
 
-      const release_id = this.$__get(this.release, 'id')
-      const episode_id = this.$__get(this.episode, 'id')
-      const release_name = this.$__get(this.release, 'names.original')
+      // const release_id = this.$__get(this.release, 'id')
+      // const episode_id = this.$__get(this.episode, 'id')
+      // const release_name = this.$__get(this.release, 'names.original')
+      //
+      // return release_id ? `Эпизод [${release_id} / ${episode_id}]: ${release_name}` : null
 
-      return release_id ? `Эпизод [${release_id} / ${episode_id}]: ${release_name}` : null
+      const episode_title = this.$__get(this.episode, 'title')
+      const episode_name = this.$__get(this.episode, 'name')
+      const release_title = this.$__get(this.release, 'names.ru')
 
+      return `${release_title} / ${episode_title}` + (episode_name ? ' — ' + episode_name : '')
     },
 
     /**

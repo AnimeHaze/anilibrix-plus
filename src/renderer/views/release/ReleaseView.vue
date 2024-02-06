@@ -90,7 +90,6 @@ export default {
   async mounted () {
     const id = this._release?.id
     if (this._release?.id) {
-      await this.fetchDates(id)
       await this.fetchAdditional(id)
     }
   },
@@ -121,23 +120,7 @@ export default {
     episodes () {
       if (!this._release) return []
 
-      if (!Object.keys(this.dates).length) return this.$__get(this._release, 'episodes', [])
-
       return this.$__get(this._release, 'episodes', [])
-        .map(episode => {
-          let date = ''
-
-          if (this.dates[episode.id]) {
-            const dt = new Date(this.dates[episode.id] * 1000)
-            const formattedDate = new Intl.DateTimeFormat('ru-RU').format(dt)
-            date = this.dates[episode.id] ? ` (${formattedDate})` : ''
-          }
-
-          return {
-            ...episode,
-            date: date,
-          }
-        })
     },
 
     /**
@@ -260,30 +243,7 @@ export default {
           }).filter(x => x !== null),
         }
       })
-    },
-
-    async fetchDates() {
-      try {
-        const { player: { playlist } } = await this.loadTitleData()
-
-        this.dates = this.extractDatesFromPlaylist(playlist)
-      } catch (error) {
-        this.$toasted.error('Ошибка загрузки связанных данных')
-        console.error(error)
-      }
-    },
-
-    async loadTitleData() {
-      return await catGirlFetch(`${domain}/v2/getTitle?id=${this.releaseId}`)
-    },
-
-    extractDatesFromPlaylist(playlist) {
-      const dates = {}
-      for (const [key, { created_timestamp }] of Object.entries(playlist)) {
-        dates[key] = created_timestamp
-      }
-      return dates
-    },
+    }
   },
 
   watch: {
@@ -297,7 +257,6 @@ export default {
           // Get release data
           this.loading = true
           await this.$store.dispatchPromise('release/getRelease', releaseId)
-          await this.fetchDates(releaseId)
           await this.fetchAdditional(releaseId)
           this.loading = false
 
