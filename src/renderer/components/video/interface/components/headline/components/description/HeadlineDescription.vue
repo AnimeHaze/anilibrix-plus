@@ -37,7 +37,8 @@ export default {
      * @return {*}
      */
     title () {
-      return this.$__get(this.episode, 'title')
+      const name = this.$__get(this.episode, 'name')
+      return this.$__get(this.episode, 'title') + (name ? ' — ' + name : '')
     },
 
   }
