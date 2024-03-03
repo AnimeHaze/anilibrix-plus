@@ -162,6 +162,7 @@
     "matroska-subtitles": "^3.3.2",
     "moment": "^2.24.0",
     "node-cron": "^2.0.3",
+    "node-global-proxy": "^1.0.1",
     "node-gyp": "^9.4.0",
     "node-localstorage": "^2.1.6",
     "object-hash": "^2.0.3",

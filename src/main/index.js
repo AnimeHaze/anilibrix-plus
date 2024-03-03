@@ -1,6 +1,23 @@
+import { app } from 'electron'
+import proxy from 'node-global-proxy';
+let proxyServer
+
+if (app.commandLine.hasSwitch('proxy-server')) {
+  proxyServer = app.commandLine.getSwitchValue('proxy-server')
+
+  if (proxyServer) {
+    proxy.setConfig({
+      http: proxyServer,
+      https: proxyServer
+    })
+
+    proxy.start();
+  }
+}
+
 // Main process
 import path from 'path'
-import { app } from 'electron'
+
 import { meta, version } from '@package'
 import sentry from './utils/sentry'
 // Store
@@ -108,6 +125,14 @@ app.on('ready', async () => {
 
   const mainWindow = Main.getWindow()
   const torrentWindow = Torrent.getWindow()
+
+  if (proxyServer) {
+    mainWindow.webContents.session
+      .setProxy({ proxyRules: proxyServer })
+
+    torrentWindow.webContents.session
+      .setProxy({ proxyRules: proxyServer })
+  }
 
   if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools()
 
