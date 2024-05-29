@@ -1,4 +1,4 @@
-import { app } from 'electron'
+import {app, BrowserWindow, ipcMain} from 'electron'
 import proxy from 'node-global-proxy';
 let proxyServer
 
@@ -52,6 +52,7 @@ import { broadcastTorrentEvents } from '@main/handlers/torrents/torrentsHandler'
 import Tray from './utils/tray'
 import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
+import {showAppError} from "@main/handlers/notifications/notificationsHandler";
 
 const { discordActivity } = require('./utils/discord')
 const {
@@ -94,6 +95,33 @@ app.on('window-all-closed', () => {
 })
 
 app.on('web-contents-created', (event, webContents) => {
+  webContents.on('did-finish-load', async () => {
+    if (webContents.getURL().startsWith('https://id.vk.com/')) {
+      webContents.on('will-redirect', async (event, url) => {
+        if (!url.startsWith('https://www.anilibria.tv/')) {
+          return true
+        }
+
+        const cookies = await webContents.session.cookies.get({ url: 'https://www.anilibria.tv' })
+
+        const { value: sessionId } = cookies.find(cookie => cookie.name === 'PHPSESSID') || {}
+
+        if (sessionId) {
+          Main.getWindow().webContents.send('VK_CODE', sessionId)
+        }
+
+        BrowserWindow.fromWebContents(webContents).hide()
+
+        webContents.on('did-finish-load', async () => {
+          await webContents.session.clearStorageData()
+          webContents.destroy()
+        })
+
+        return true
+      });
+    }
+  })
+
   webContents.setWindowOpenHandler(openWindowInterceptor)
   webContents.setUserAgent(`${meta.name}/${version}`)
   webContents.on('will-attach-webview', (event, webPreferences, params) => {

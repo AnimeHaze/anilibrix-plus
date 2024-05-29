@@ -2,7 +2,7 @@ import { shell } from 'electron'
 
 function openWindowInterceptor (details) {
   if (!details.url.startsWith('resource://')) {
-    if (!details.url.startsWith('https://oauth.vk.com/authorize')) {
+    if (!details.url.startsWith('https://oauth.vk.com/authorize') && !details.url.startsWith('https://id.vk.com/auth')) {
       shell.openExternal(details.url)
       return { action: 'deny' }
     }
