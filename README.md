@@ -2,6 +2,8 @@
 
 ### Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
 
+[![Загрузите из Snap Store](https://snapcraft.io/static/images/badges/ru/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
+
 ![Anilibrix](https://raw.githubusercontent.com/pavloniym/anilibrix/master/.github/assets/anilibrix.png)
 
 ### Особенности не официальной версии (этой):
