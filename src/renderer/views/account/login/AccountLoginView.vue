@@ -112,7 +112,7 @@ export default {
 
     authorizeWithVK () {
       window.open(
-        'https://id.vk.com/auth?return_auth_hash=677a695397f7de30e9&redirect_uri=https%3A%2F%2Fwww.anilibria.tv%2Fpublic%2Fvk.php&redirect_uri_hash=12e7b3a47bed04dc26&force_hash=&app_id=5315207&response_type=code&code_challenge=&code_challenge_method=&scope=0&state='
+        'https://oauth.vk.com/authorize?client_id=5315207&redirect_uri=https://www.anilibria.tv/public/vk.php'
         ,'targetWindow',
         `toolbar=no,
                 location=no,
