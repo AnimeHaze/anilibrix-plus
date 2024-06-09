@@ -128,6 +128,23 @@
     </v-card>
     <v-divider/>
 
+    <!-- Opening Skip Button -->
+    <v-card class="mt-2">
+      <v-list-item dense @click="_setRutube(!_rutube)">
+        <v-list-item-title>Загрузка видео с Rutube</v-list-item-title>
+        <v-list-item-action class="mr-2">
+          <v-switch :input-value="_rutube" @change="_setRutube"/>
+        </v-list-item-action>
+      </v-list-item>
+      <v-card-text class="pt-2 caption">
+        <div>
+          Позволяет смотреть релизы размещенные только на сервере Rutube
+        </div>
+        <div>Может немного увеличить время загрузки каталога релизов и избранного где присутствют RuTube релизы</div>
+      </v-card-text>
+    </v-card>
+    <v-divider/>
+
     <v-card>
       <v-card-text class="caption">Горячая клавиша кнопки пропуска опенинга</v-card-text>
       <v-card-text>
@@ -182,7 +199,8 @@ export default {
       _opening_skip_button: s => s.opening.skip_button,
       _opening_skip_button_key: s => s.opening.skip_button_key,
       _auto_opening_skip: s => s.opening.autoSkip,
-      _auto_opening_skip_key: s => s.opening.autoSkipKey
+      _auto_opening_skip_key: s => s.opening.autoSkipKey,
+      _rutube: s => s.rutube
     })
   },
   data () {
@@ -233,7 +251,8 @@ export default {
       _setOpeningSkipTime: 'setOpeningSkipTime',
       _setOpeningSkipButton: 'setOpeningSkipButton',
       _setOpeningSkipButtonKey: 'setOpeningSkipButtonKey',
-      _setAutoSkipKey: 'setAutoSkipKey'
+      _setAutoSkipKey: 'setAutoSkipKey',
+      _setRutube: 'setRutube'
     }),
   }
 

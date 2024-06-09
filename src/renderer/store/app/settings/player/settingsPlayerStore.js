@@ -11,6 +11,7 @@ const SET_OPENING_SKIP_BUTTON = 'SET_OPENING_SKIP_BUTTON'
 const SET_OPENING_SKIP_BUTTON_KEY = 'SET_OPENING_SKIP_BUTTON_KEY'
 const SET_OPENING_AUTOSKIP = 'SET_OPENING_AUTOSKIP'
 const SET_OPENING_AUTOSKIP_BUTTON_KEY = 'SET_OPENING_AUTOSKIP_BUTTON_KEY'
+const SET_RUTUBE = 'SET_RUTUBE'
 
 export default {
   namespaced: true,
@@ -33,7 +34,8 @@ export default {
     },
     video: {
       buffer: 300
-    }
+    },
+    rutube: true
   },
 
   mutations: {
@@ -128,8 +130,8 @@ export default {
     [SET_OPENING_SKIP_BUTTON]: (s, state) => (s.opening.skip_button = state),
     [SET_OPENING_SKIP_BUTTON_KEY]: (s, state) => (s.opening.skip_button_key = state),
     [SET_OPENING_AUTOSKIP]: (s, state) => (s.opening.autoSkip = state),
-    [SET_OPENING_AUTOSKIP_BUTTON_KEY]: (s, state) => (s.opening.autoSkipKey = state)
-
+    [SET_OPENING_AUTOSKIP_BUTTON_KEY]: (s, state) => (s.opening.autoSkipKey = state),
+    [SET_RUTUBE]: (s, state) => (s.rutube = state)
   },
 
   actions: {
@@ -228,6 +230,7 @@ export default {
      * @return {*}
      */
     setAutoSkip: ({ commit }, state) => commit(SET_OPENING_AUTOSKIP, state),
-    setAutoSkipKey: ({ commit }, state) => commit(SET_OPENING_AUTOSKIP_BUTTON_KEY, state)
+    setAutoSkipKey: ({ commit }, state) => commit(SET_OPENING_AUTOSKIP_BUTTON_KEY, state),
+    setRutube: ({ commit }, state) => commit(SET_RUTUBE, state)
   }
 }

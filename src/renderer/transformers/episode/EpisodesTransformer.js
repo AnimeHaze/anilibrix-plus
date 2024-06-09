@@ -54,17 +54,19 @@ export default class EpisodesTransformer extends BaseTransformer {
     try {
       const episodes = {}
 
-      const promises = []
-      for (const ep in playlist) {
-        if (playlist[ep].sources.is_rutube) {
-          promises.push(
-            catGirlFetch(`https://rutube.ru/api/play/options/${playlist[ep].rutube_id}/?no_404=true&referer&pver=v2`)
-              .then(x => (playlist[ep].fullhd = x.video_balancer.m3u8))
-              .catch(x => console.log(x))
-          )
+      if (store.state.app.settings.player.rutube) {
+        const promises = []
+        for (const ep in playlist) {
+          if (playlist[ep].sources.is_rutube) {
+            promises.push(
+              catGirlFetch(`https://rutube.ru/api/play/options/${playlist[ep].rutube_id}/?no_404=true&referer&pver=v2`, {}, 3000)
+                .then(x => (playlist[ep].fullhd = x.video_balancer.m3u8))
+                .catch(x => console.log(x))
+            )
+          }
         }
+        await Promise.allSettled(promises)
       }
-      await Promise.all(promises)
 
       // Parse playlist
       // Parse upscale
