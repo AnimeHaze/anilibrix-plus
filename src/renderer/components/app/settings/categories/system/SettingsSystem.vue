@@ -56,7 +56,7 @@
           outlined
           :value="_api_endpoint"
           @input="_setAPIEndpoint($event ? $event : process.env.API_ENDPOINT_URL)"
-          :items="['https://anilibria.tv/', 'https://wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/']"
+          :items="['https://anilibria.tv/', 'https://wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/', 'https://anilibria.animehaze.me/']"
           label="Точка подключения к API"
           persistent-hint
         />
@@ -66,7 +66,7 @@
           class="mb-2"
           :value="_static_endpoint"
           @input="_setAPIStaticEndpoint($event ? $event : process.env.STATIC_ENDPOINT_URL)"
-          :items="['https://static-libria.weekstorm.one/', 'https://static.anilibria.tv/', 'https://static.wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/']"
+          :items="['https://static-libria.weekstorm.one/', 'https://static.anilibria.tv/', 'https://static.wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/', 'https://anilibria.animehaze.me/']"
           label="Точка подключения к серверу статики"
           persistent-hint
         />
@@ -74,6 +74,8 @@
         <div class="caption">
           Вы можете использовать основной домен, если он не заблокирован вашим провайдером, или использовать
           дополнительные домены
+
+          Вы можете ввесли свю точку подключения к API и серверу статики в поле "Точка подключения к API" и "Точка подключения к серверу статики"
 
           <b>После изменения точки доступа рекомендуется перезагрузить приложение</b>
         </div>
