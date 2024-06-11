@@ -2486,7 +2486,7 @@ __metadata:
     vue-toasted: ^1.1.27
     vue-yandex-metrika: ^1.8.3
     vuelidate: ^0.7.5
-    vuetify: ^2.2.8
+    vuetify: 2.2.8
     vuetify-loader: ^1.4.3
     vuex: ^3.0.1
     vuex-electron: ^1.0.3
@@ -16732,12 +16732,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vuetify@npm:^2.2.8":
-  version: 2.7.1
-  resolution: "vuetify@npm:2.7.1"
+"vuetify@npm:2.2.8":
+  version: 2.2.8
+  resolution: "vuetify@npm:2.2.8"
   peerDependencies:
     vue: ^2.6.4
-  checksum: 39483626182c9a728e1a217b1ea4f57fd440b0541d968a661c431a094e0c23ad3abd4ee4d55ecff293b2786b4a73706893883d4cd152965ecb7455b8ad4cddc3
+  checksum: caa0cb58dc9de0b69408a43b162196927eb21a6e5f6ae097b36a88a0ed9a82cc1886febfdc081993f1bce6c97512f3d4defe46765a12f24b1db70c77fc61a1a6
   languageName: node
   linkType: hard
 
