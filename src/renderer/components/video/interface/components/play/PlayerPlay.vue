@@ -47,6 +47,7 @@
 import { invokeRichPresense, sendDisableSystemSleepBlockerEvent, sendEnableSystemSleepBlockerEvent } from '@main/handlers/app/appHandlers'
 import { toVideo } from '@utils/router/views'
 import { ActivityBuilder } from '@utils/activityBuilder'
+import humanTime from "@utils/strings/human-time";
 
 const props = {
   player: {
@@ -140,13 +141,14 @@ export default {
     this.activityInterval = setInterval(() => {
       const a = new ActivityBuilder()
       a.setImage(this.release.poster)
-      a.firstLine('Смотрит аниме')
-      a.secondLine(`[${this.episode.id}/${this.episodes.length}] ` + this.title)
+      a.firstLine(`[${this.episode.id}/${this.episodes.length}] ` + this.title)
+
+      a.secondLine(`${humanTime(this.player.currentTime)} / ${humanTime(this.player.duration)}` + (this.player.paused ? ' [ПАУЗА]' : ''))
       a.firstButton('Anilibria.TV', 'https://anilibria.tv')
-      a.start(new Date())
-      const d = new Date()
-      d.setSeconds(d.getSeconds() + (this.player.duration - this.player.currentTime))
-      a.end(d)
+      // a.start(new Date())
+      // const d = new Date()
+      //d.setSeconds(d.getSeconds() + (this.player.duration - this.player.currentTime))
+      //a.end(d)
       a.secondButton(
         this.title.slice(0, 29) + (this.title.length > 29 ? '...' : ''),
         'https://anilibria.tv/release/' + this.release.code + '.html'
