@@ -51,7 +51,8 @@ export default class Window {
     const mainWindowState = windowStateKeeper({
       file: 'window-state.json',
       defaultWidth: opts.width,
-      defaultHeight: opts.height
+      defaultHeight: opts.height,
+      fullScreen: false
     })
 
     console.log('Window-state: is Main?', this.isMain ?? false)
@@ -62,7 +63,8 @@ export default class Window {
         x: mainWindowState.x,
         y: mainWindowState.y,
         width: mainWindowState.width,
-        height: mainWindowState.height
+        height: mainWindowState.height,
+        fullscreen: false
       })
 
       this._window = new BrowserWindow(opts)
