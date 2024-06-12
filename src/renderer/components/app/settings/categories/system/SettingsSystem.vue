@@ -82,6 +82,19 @@
       </v-card-text>
     </v-card>
 
+    <v-card class="mt-2">
+      <v-list-item dense @click="_setDRPC(!_drpc_enabled)">
+        <v-list-item-title>Discord Rich Presence</v-list-item-title>
+        <v-list-item-action class="mr-2">
+          <v-switch :input-value="_drpc_enabled" @change="_setDRPC"/>
+        </v-list-item-action>
+      </v-list-item>
+      <v-card-text class="pt-2 caption">
+        Приложение будет выводть информацию о просматриваемомрелизе в Discord Rich Presence
+      </v-card-text>
+    </v-card>
+    <v-divider/>
+
     <!-- System Notifications -->
     <v-card>
       <v-list-item dense @click="_setSystemNotifications(!_notifications_system)">
@@ -225,7 +238,8 @@ export default {
       _static_endpoint: s => s.api.static_endpoint,
       _notifications_system: s => s.notifications.system,
       _appbar_right: s => s.appbar_right,
-      _filter_notify: s => s.filter_notify
+      _filter_notify: s => s.filter_notify,
+      _drpc_enabled: s => s.drpc_enabled,
     }),
   },
 
@@ -248,6 +262,7 @@ export default {
       _setAPIStaticEndpoint: 'setAPIStaticEndpoint',
       _setAppbarRight: 'setAppbarRight',
       _setFilterNotify: 'setFilterNotify',
+      _setDRPC: 'setDRPC'
     })
   },
 

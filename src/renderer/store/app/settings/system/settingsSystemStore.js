@@ -9,6 +9,8 @@ const SET_FILTER_NOTIFY = 'SET_FILTER_NOTIFY';
 const SET_API_ENDPOINT = 'SET_API_ENDPOINT'
 const SET_API_STATIC_ENDPOINT = 'SET_API_STATIC_ENDPOINT'
 const SET_TORRENT_TYPE = 'SET_TORRENT_TYPE'
+const SET_DRPC = 'SET_DRPC'
+
 export default {
   namespaced: true,
   state: {
@@ -31,11 +33,13 @@ export default {
     notifications: {
       system: true
     },
-    torrentType: 'magnet'
+    torrentType: 'magnet',
+    drpc_enabled: true
   },
 
   mutations: {
     [SET_TORRENT_TYPE]: (s, state) => (s.torrentType = state),
+    [SET_DRPC]: (s, state) => (s.drpc_enabled = state),
     [SET_API_ENDPOINT]: (s, state) => (s.api.endpoint = state),
     [SET_API_STATIC_ENDPOINT]: (s, state) => (s.api.static_endpoint = state),
     /**
@@ -192,6 +196,7 @@ export default {
      */
     // eslint-disable-next-line camelcase
     setFilterNotify: ({ commit }, filter_notify) => commit(SET_FILTER_NOTIFY, filter_notify),
-    setTorrentType: ({ commit }, type) => commit(SET_TORRENT_TYPE, type)
+    setTorrentType: ({ commit }, type) => commit(SET_TORRENT_TYPE, type),
+    setDRPC: ({ commit }, type) => commit(SET_DRPC, type)
   }
 }

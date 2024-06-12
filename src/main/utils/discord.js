@@ -1,3 +1,5 @@
+import store from "@store";
+
 const RPC = require('discord-rpc')
 
 const logs = !!process.env.DISCORD_RICH_PRESENCE_DEBUG
@@ -48,12 +50,16 @@ export function discordActivity () {
   let activity = {}
 
   const interval = setInterval(() => {
-    if (client && client.transport.socket) {
-      client.setActivity(activity)
-        .then(() => logger('Discord set activity', activity))
-        .catch(err => logger('Discord set activity error', err))
+    if (store.state.app.settings.system.drpc_enabled) {
+      if (client && client.transport.socket) {
+        client.setActivity(activity)
+          .then(() => logger('Discord set activity', activity))
+          .catch(err => logger('Discord set activity error', err))
+      }
+    } else {
+      client.clearActivity()
     }
-  }, 2000)
+  }, 1000)
 
   return {
     setActivity: function (discordPresence) {
