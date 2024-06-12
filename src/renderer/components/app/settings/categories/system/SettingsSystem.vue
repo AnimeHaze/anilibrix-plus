@@ -90,7 +90,7 @@
         </v-list-item-action>
       </v-list-item>
       <v-card-text class="pt-2 caption">
-        Приложение будет выводть информацию о просматриваемомрелизе в Discord Rich Presence
+        Приложение будет выводть информацию о просматриваемом релизе в Discord Rich Presence
       </v-card-text>
     </v-card>
     <v-divider/>
