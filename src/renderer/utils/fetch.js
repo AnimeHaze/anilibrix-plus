@@ -29,7 +29,17 @@ export function catGirlFetch(url, init = {}, timeout = 2000) {
 
         return x
       })
-      .then(x => init.raw ? x : x.json())
+      .then(async x => {
+        if (init.raw) return x
+
+        const text = await x.text()
+        try {
+          return JSON.parse(text)
+        } catch (e) {
+          console.log(text)
+          throw e
+        }
+      })
       .catch(err => {
         if (err.status === 404) throw err
 
