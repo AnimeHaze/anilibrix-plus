@@ -40,11 +40,14 @@ import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
 import { showAppError } from '@main/handlers/notifications/notificationsHandler';
 import { consoleLogToFile } from '@main/utils/log-to-file';
-import {debounce} from "lodash";
+import { debounce } from 'lodash';
 let proxyServer
 
-if (app.commandLine.hasSwitch('proxy-server') || store.state.app.proxy) {
-  proxyServer = app.commandLine.getSwitchValue('proxy-server') || store.state.app.proxy
+const proxyServerValue = store.state.app.settings.system.proxy
+console.log('Load proxy ', proxyServerValue)
+
+if (app.commandLine.hasSwitch('proxy-server') || proxyServerValue) {
+  proxyServer = app.commandLine.getSwitchValue('proxy-server') || proxyServerValue
 
   if (proxyServer) {
     proxy.setConfig({
@@ -54,6 +57,8 @@ if (app.commandLine.hasSwitch('proxy-server') || store.state.app.proxy) {
 
     proxy.start();
   }
+} else {
+  proxy.system()
 }
 
 const { discordActivity } = require('./utils/discord')
@@ -77,6 +82,7 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
 
+app.commandLine.appendSwitch('ignore-certificate-errors')
 // Add command lines arguments
 app.commandLine.appendSwitch('disable-site-isolation-trials')
 app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
@@ -84,7 +90,7 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 
 process.on('uncaughtException', error => {
   console.log('Unhandled Error', error)
-})
+}) 
 
 process.on('unhandledRejection', error => {
   console.log('Unhandled Promise Rejection', error);
@@ -143,8 +149,6 @@ app.on('ready', async () => {
   consoleLogToFile({
     logFilePath: path.join(app.getPath('userData') + '/anilibrix.log')
   })
-
-  console.log(8888, path.join(app.getPath('userData') + '/anilibrix.log'))
 
   // Set user id
   await setUserId()
@@ -228,12 +232,14 @@ const appHandlers = () => {
       console.log('Proxy url', url)
       setProxy(url)
     } else {
-      proxy.stop()
+      proxy.system()
     }
   })
 }
 
-const setProxy = debounce(function setProxy (url) {
+const setProxy = debounce(setProxyOrig, 2000)
+
+function setProxyOrig (url) {
   proxy.setConfig({
     http: url,
     https: url
@@ -250,7 +256,7 @@ const setProxy = debounce(function setProxy (url) {
     .setProxy({ proxyRules: url })
 
   proxy.start()
-}, 2000)
+}
 
 /**
  * Torrents handlers
