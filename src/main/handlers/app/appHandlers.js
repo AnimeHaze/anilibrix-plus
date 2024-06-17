@@ -15,7 +15,8 @@ axiosRetry(axios, {
   retryCondition: function (response) {
     if (response.status === 404) return false
 
-    return axiosRetry.isNetworkOrIdempotentRequestError(response)
+    return true
+    // return axiosRetry.isNetworkOrIdempotentRequestError(response)
   }
 })
 
