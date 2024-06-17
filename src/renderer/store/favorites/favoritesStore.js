@@ -209,7 +209,6 @@ export default {
             // Show error
             // Throw error
             showAppError('Произошла ошибка при загрузке избранных релизов')
-            console.log(error)
           }
         } finally {
           commit(SET_LOADING, false)
@@ -253,7 +252,6 @@ export default {
             // Show app error
             // Throw error
             showAppError(error)
-            console.log(error)
           }
         }
       }
@@ -295,7 +293,6 @@ export default {
             // Show app error
             // Throw error
             showAppError(error)
-            console.log(error)
           }
         }
       }

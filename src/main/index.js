@@ -52,7 +52,8 @@ import { broadcastTorrentEvents } from '@main/handlers/torrents/torrentsHandler'
 import Tray from './utils/tray'
 import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
-import {showAppError} from "@main/handlers/notifications/notificationsHandler";
+import { showAppError } from '@main/handlers/notifications/notificationsHandler';
+import { consoleLogToFile } from '@main/utils/log-to-file';
 
 const { discordActivity } = require('./utils/discord')
 const {
@@ -138,6 +139,12 @@ app.on('web-contents-created', (event, webContents) => {
 
 // App ready handler
 app.on('ready', async () => {
+  consoleLogToFile({
+    logFilePath: path.join(app.getPath('userData') + '/anilibrix.log')
+  })
+
+  console.log(8888, path.join(app.getPath('userData') + '/anilibrix.log'))
+
   // Set user id
   await setUserId()
 

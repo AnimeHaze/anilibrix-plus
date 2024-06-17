@@ -104,7 +104,6 @@ export default {
         // Show app error
         // Throw error
         showAppError(error)
-        console.log(error)
       }
     },
     /**

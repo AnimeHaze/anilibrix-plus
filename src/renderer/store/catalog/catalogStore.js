@@ -201,7 +201,6 @@ export default {
         // Show app error
         // Throw error
         showAppError('Произошла ошибка при загрузке релизов')
-        console.log(error)
       } finally {
         commit(SET_CATALOG_LOADING, false)
       }
@@ -232,7 +231,6 @@ export default {
         // Show app error
         // Throw error
         showAppError('Произошла ошибка при загрузке фильтров по жанрам')
-        console.log(error)
       } finally {
         commit(SET_FILTER_LOADING, {
           filter,
@@ -266,7 +264,6 @@ export default {
         // Show app error
         // Throw error
         showAppError('Произошла ошибка при загрузке фильтров по годам')
-        console.log(error)
 
       } finally {
         commit(SET_FILTER_LOADING, {
