@@ -13,11 +13,11 @@ class MainWindow extends Window {
     const minWidth = 820
     const minHeight = 520
 
-    const iconsPath = path.join(__dirname, '../../build/icons/app')
+    const iconsPath = path.resolve(__dirname, '..', '..', '..', '..', 'build', 'icons', 'app')
     const icons = {
       win32: 'anilibria.ico',
       darwin: 'anilibria.icns',
-      linux: '256x256.png'
+      linux: 'anilibria.png'
     }
 
     return {
