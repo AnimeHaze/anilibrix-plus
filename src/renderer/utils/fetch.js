@@ -3,7 +3,7 @@ const fetchRetry = require('fetch-retry')(originalFetch)
 
 const attempt = Symbol('attempt')
 
-export function catGirlFetch(url, init = {}, timeout = 10000) {
+export function catGirlFetch(url, init = {}, timeout = 2000) {
   init[attempt] || (init[attempt] = 0)
   init.retryOn = function (attempt, error) {
     if (attempt > 10) return false // Stop retry after 10 attempt
