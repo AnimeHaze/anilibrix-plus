@@ -49,6 +49,29 @@
       </v-card-text>
     </v-card>
 
+    <v-card>
+      <v-card-text class="mt-2">
+        <v-text-field
+          outlined
+          class="mb-2"
+          :value="_proxy"
+          @input="setProxyServer($event)"
+          label="Прокси сервер"
+          persistent-hint
+        />
+
+        <div class="caption">
+          <div>
+            Прокси для подключения к серверу статики и API. Поддерживается HTTP и HTTPS
+          </div>
+
+          <div>
+            <b>После изменения точки доступа рекомендуется перезагрузить приложение</b>
+          </div>
+        </div>
+      </v-card-text>
+    </v-card>
+
     <!-- API Endpoint -->
     <v-card>
       <v-card-text class="mt-2">
@@ -216,6 +239,8 @@ import { mapActions, mapGetters, mapState } from 'vuex'
 import Confirm from '@components/app/settings/categories/system/dialogs/confirm.vue'
 import snapshotsList from '@components/app/settings/categories/system/dialogs/snapshotsList.vue'
 import { AppPlatformMixin } from '@mixins/app'
+import {debounce} from "lodash";
+import {invokeUpdateProxy} from "@main/handlers/app/appHandlers";
 
 export default {
   mixins: [AppPlatformMixin],
@@ -240,10 +265,15 @@ export default {
       _appbar_right: s => s.appbar_right,
       _filter_notify: s => s.filter_notify,
       _drpc_enabled: s => s.drpc_enabled,
+      _proxy: s => s.proxy
     }),
   },
 
   methods: {
+    setProxyServer: function ($event) {
+      this._setProxy($event)
+      invokeUpdateProxy($event)
+    },
     showSnapshotsList: function () {
       this.$refs.confirm.hideDialog()
       this.$refs.snapshotsList.showDialog()
@@ -262,7 +292,8 @@ export default {
       _setAPIStaticEndpoint: 'setAPIStaticEndpoint',
       _setAppbarRight: 'setAppbarRight',
       _setFilterNotify: 'setFilterNotify',
-      _setDRPC: 'setDRPC'
+      _setDRPC: 'setDRPC',
+      _setProxy: 'setProxy'
     })
   },
 

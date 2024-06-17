@@ -8,6 +8,7 @@ const SET_APPBAR_RIGHT = 'SET_APPBAR_RIGHT';
 const SET_FILTER_NOTIFY = 'SET_FILTER_NOTIFY';
 const SET_API_ENDPOINT = 'SET_API_ENDPOINT'
 const SET_API_STATIC_ENDPOINT = 'SET_API_STATIC_ENDPOINT'
+const SET_PROXY = 'SET_PROXY'
 const SET_TORRENT_TYPE = 'SET_TORRENT_TYPE'
 const SET_DRPC = 'SET_DRPC'
 
@@ -34,7 +35,8 @@ export default {
       system: true
     },
     torrentType: 'magnet',
-    drpc_enabled: true
+    drpc_enabled: true,
+    proxy: ''
   },
 
   mutations: {
@@ -42,6 +44,7 @@ export default {
     [SET_DRPC]: (s, state) => (s.drpc_enabled = state),
     [SET_API_ENDPOINT]: (s, state) => (s.api.endpoint = state),
     [SET_API_STATIC_ENDPOINT]: (s, state) => (s.api.static_endpoint = state),
+    [SET_PROXY]: (s, state) => (s.proxy = state),
     /**
      * Set updates state
      *
@@ -134,7 +137,7 @@ export default {
      */
     setAPIEndpoint: ({ commit }, state) => commit(SET_API_ENDPOINT, state),
     setAPIStaticEndpoint: ({ commit }, state) => commit(SET_API_STATIC_ENDPOINT, state),
-
+    setProxy: ({ commit }, state) => commit(SET_PROXY, state),
     /**
      * Set updates timeout
      *

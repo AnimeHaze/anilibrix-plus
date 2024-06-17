@@ -5,10 +5,10 @@ import { setEncrypted } from '@main/utils/safeStorage'
 import axios from 'axios'
 import axiosRetry from 'axios-retry';
 import parseTorrent from 'parse-torrent';
-import fs from 'fs';
 import qs from 'querystring';
 import { catGirlFetch } from '@utils/fetch';
 import { parse } from 'content-disposition-attachment';
+
 axiosRetry(axios, {
   retryDelay: () => 1500,
   retries: 10,
@@ -39,7 +39,7 @@ export const APP_CHECK_API_ENDPOINT = 'app:check_api_endpoint'
 export const APP_RAND = 'app:rand'
 
 export const APP_TORRENT_PARSE = 'app:torrent_parse'
-
+export const APP_UPDATE_PROXY = 'app:update_proxy'
 /**
  * Send app about event
  *
@@ -235,6 +235,13 @@ export const handleRand = () => {
       }
       throw e
     }
+  })
+}
+
+export const invokeUpdateProxy = (url) => ipcRenderer.invoke(APP_UPDATE_PROXY, url)
+export const handleUpdateProxy = (cb) => {
+  ipcMain.handle(APP_UPDATE_PROXY, async (event, url) => {
+    return cb(url)
   })
 }
 

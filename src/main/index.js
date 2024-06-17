@@ -1,19 +1,5 @@
-import {app, BrowserWindow, ipcMain} from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import proxy from 'node-global-proxy';
-let proxyServer
-
-if (app.commandLine.hasSwitch('proxy-server')) {
-  proxyServer = app.commandLine.getSwitchValue('proxy-server')
-
-  if (proxyServer) {
-    proxy.setConfig({
-      http: proxyServer,
-      https: proxyServer
-    })
-
-    proxy.start();
-  }
-}
 
 // Main process
 import path from 'path'
@@ -21,7 +7,7 @@ import path from 'path'
 import { meta, version } from '@package'
 import sentry from './utils/sentry'
 // Store
-import { getStore, setUserId } from '@store'
+import store, { getStore, setUserId } from '@store'
 
 // Windows
 import { Main, Torrent } from './utils/windows'
@@ -42,7 +28,7 @@ import {
   handleRichPresense,
   handleSafeStorageEncrypt,
   handleShowConfig,
-  handleTorrentParse
+  handleTorrentParse, handleUpdateProxy
 } from '@main/handlers/app/appHandlers'
 
 // Torrent Handlers
@@ -54,6 +40,21 @@ import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
 import { showAppError } from '@main/handlers/notifications/notificationsHandler';
 import { consoleLogToFile } from '@main/utils/log-to-file';
+import {debounce} from "lodash";
+let proxyServer
+
+if (app.commandLine.hasSwitch('proxy-server') || store.state.app.proxy) {
+  proxyServer = app.commandLine.getSwitchValue('proxy-server') || store.state.app.proxy
+
+  if (proxyServer) {
+    proxy.setConfig({
+      http: proxyServer,
+      https: proxyServer
+    })
+
+    proxy.start();
+  }
+}
 
 const { discordActivity } = require('./utils/discord')
 const {
@@ -177,7 +178,7 @@ app.on('ready', async () => {
   mainWindow
     .once('ready-to-show', () => {
       mainWindow.show()
-      //autoUpdater.checkForUpdatesAndNotify() // Auto update
+      // autoUpdater.checkForUpdatesAndNotify() // Auto update
     })
     .on('close', () => {
       destroyRichPresence()
@@ -214,7 +215,40 @@ const appHandlers = () => {
   handleRand()
   handleShowConfig()
   handleTorrentParse()
+  handleUpdateProxy((url) => {
+    if (url) {
+      try {
+        new URL(url)
+      } catch (e) {
+        return
+      }
+
+      console.log('Proxy url', url)
+      setProxy(url)
+    } else {
+      proxy.stop()
+    }
+  })
 }
+
+const setProxy = debounce(function setProxy (url) {
+  proxy.setConfig({
+    http: url,
+    https: url
+  })
+  console.log('set proxy', url)
+
+  const mainWindow = Main.getWindow()
+  const torrentWindow = Torrent.getWindow()
+
+  mainWindow.webContents.session
+    .setProxy({ proxyRules: url })
+
+  torrentWindow.webContents.session
+    .setProxy({ proxyRules: url })
+
+  proxy.start()
+}, 2000)
 
 /**
  * Torrents handlers
