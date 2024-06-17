@@ -83,6 +83,7 @@ import screenfull from 'screenfull'
 import { AppKeyboardHandlerMixin, AppMouseHandlerMixin } from '@mixins/app'
 import { mapActions, mapState } from 'vuex'
 import { catGirlFetch } from '@utils/fetch'
+import {invokeGetTitleV2} from "@main/handlers/app/appHandlers";
 
 const props = {
   player: {
@@ -319,7 +320,7 @@ export default {
     try {
       const epId = this.$__get(this.episode, 'id')
       const rId = this.$__get(this.release, 'id')
-      const { player: playlist } = await catGirlFetch(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`)
+      const { player: playlist } = invokeGetTitleV2(rId)
       const serie = playlist.playlist.find(x => x.serie === epId)
 
       if (serie) {

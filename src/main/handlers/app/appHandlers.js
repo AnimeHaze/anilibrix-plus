@@ -2,7 +2,7 @@ import { Main, Torrent } from '@main/utils/windows'
 import { app, ipcMain, ipcRenderer } from 'electron'
 import { start as startSystemSleepBlocker, stop as stopSystemSleepBlocker } from '../../utils/powerSaveBlocker'
 import { setEncrypted } from '@main/utils/safeStorage'
-import axios from 'axios'
+import axios from '@plugins/axios'
 import axiosRetry from 'axios-retry';
 import parseTorrent from 'parse-torrent';
 import qs from 'querystring';
@@ -37,6 +37,8 @@ export const APP_SHOW_CONFIG = 'app:show_config'
 export const APP_CHECK_API_ENDPOINT = 'app:check_api_endpoint'
 
 export const APP_RAND = 'app:rand'
+export const APP_GET_TITLE_V2 = 'app:get_title_v2'
+export const APP_GET_TITLE_V3 = 'app:get_title_v3'
 
 export const APP_TORRENT_PARSE = 'app:torrent_parse'
 export const APP_UPDATE_PROXY = 'app:update_proxy'
@@ -235,6 +237,38 @@ export const handleRand = () => {
       }
       throw e
     }
+  })
+}
+
+export const invokeGetTitleV3 = (url) => ipcRenderer.invoke(APP_GET_TITLE_V3, url)
+export const handleGetTitleV3 = () => {
+  ipcMain.handle(APP_GET_TITLE_V3, async (event, filter) => {
+    const response = Promise.any([
+      axios.get('https://api.wwnd.space/v3/title?' + filter).then(x => x.data),
+      axios.get('https://api.anilibria.tv/v3/title?' + filter).then(x => x.data)
+    ])
+
+    response.catch(x => {
+      console.log('handleGetTitleV3', x)
+    })
+
+    return await response
+  })
+}
+
+export const invokeGetTitleV2 = (url) => ipcRenderer.invoke(APP_GET_TITLE_V2, url)
+export const handleGetTitleV2 = () => {
+  ipcMain.handle(APP_GET_TITLE_V2, async (event, rId) => {
+    const response = Promise.any([
+      axios.get(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data),
+      axios.get(`https://api.anilibria.tv/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data)
+    ])
+
+    response.catch(x => {
+      console.log('handleGetTitleV2', x)
+    })
+
+    return await response
   })
 }
 

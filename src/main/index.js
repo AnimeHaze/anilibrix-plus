@@ -23,7 +23,7 @@ import {
   catchAppDevtoolsTorrentEvent,
   catchAppDockNumberEvent,
   catchDisableSystemSleepBlockerEvent,
-  catchEnableSystemSleepBlockerEvent,
+  catchEnableSystemSleepBlockerEvent, handleGetTitleV2, handleGetTitleV3,
   handleRand,
   handleRichPresense,
   handleSafeStorageEncrypt,
@@ -215,6 +215,8 @@ const appHandlers = () => {
   handleRand()
   handleShowConfig()
   handleTorrentParse()
+  handleGetTitleV2()
+  handleGetTitleV3()
   handleUpdateProxy((url) => {
     if (url) {
       try {

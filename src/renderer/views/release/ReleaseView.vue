@@ -61,8 +61,7 @@ import { mapState } from 'vuex'
 import router from '@router'
 import { catGirlFetch } from '@utils/fetch'
 import ReleaseProxy from '@proxies/release'
-
-const domain = 'https://api.wwnd.space'
+import {invokeGetTitleV3} from "@main/handlers/app/appHandlers";
 
 const props = {
   releaseId: {
@@ -192,7 +191,7 @@ export default {
     },
 
     async loadFranchisesAndTeam() {
-      return await catGirlFetch(`${domain}/v3/title?filter=franchises,team&playlist_type=array&id=${this.releaseId}`)
+      return await invokeGetTitleV3(`filter=franchises,team&playlist_type=array&id=${this.releaseId}`)
     },
 
     extractReleaseIds(franchises) {
@@ -207,8 +206,8 @@ export default {
 
     async loadAdditionalData(releaseIds) {
       const result = await Promise.allSettled(
-          releaseIds.map((id) => catGirlFetch(
-            `${domain}/v3/title?filter=status.string,id,type.full_string,string,names.ru,posters.medium&include=raw_poster&description_type=plain&playlist_type=object&id=${id}`
+          releaseIds.map((id) => invokeGetTitleV3(
+            `filter=status.string,id,type.full_string,string,names.ru,posters.medium&include=raw_poster&description_type=plain&playlist_type=object&id=${id}`
           ))
       )
 
