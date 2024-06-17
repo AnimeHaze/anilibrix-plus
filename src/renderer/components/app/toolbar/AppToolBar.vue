@@ -46,6 +46,7 @@ import Account from './components/account'
 import Settings from './components/settings'
 import Notifications from './components/notifications'
 import { invokeRand } from '@main/handlers/app/appHandlers'
+import {showAppError} from "@main/handlers/notifications/notificationsHandler";
 
 export default {
   components: {
@@ -70,15 +71,23 @@ export default {
           this.direction = 0
         }
       }, 200)
-      const { id, name } = await invokeRand()
-      if (id === -1) {
-        this.$toasted.show('Функция не поддерживается выбранным API сервером', { type: 'error' })
-        return
+      try {
+        const {id, name} = await invokeRand()
+        if (id === -1) {
+          this.$toasted.show('Функция не поддерживается выбранным API сервером', {type: 'error'})
+          return
+        }
+        await this.$router.push('/release/' + id + '/' + name)
+        clearInterval(this.diceIntervalId)
+        this.dice = 5
+        this.diceIntervalId = null
+      } catch (e) {
+        clearInterval(this.diceIntervalId)
+        this.dice = 5
+        this.diceIntervalId = null
+        console.log(e)
+        showAppError(e)
       }
-      await this.$router.push('/release/' + id + '/' + name )
-      clearInterval(this.diceIntervalId)
-      this.dice = 5
-      this.diceIntervalId = null
     }
   },
   data () {
