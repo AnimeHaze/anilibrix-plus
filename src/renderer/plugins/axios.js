@@ -11,7 +11,7 @@
  */
 import Axios from 'axios'
 import store from '@store'
-import {clone, cloneDeep} from 'lodash'
+import { clone, cloneDeep } from 'lodash'
 import FormData from 'form-data'
 
 // Set cookies
@@ -61,17 +61,19 @@ const responseErrorHandler = async error => {
     }
   } else if (error.request) {
     const req = filterUnderscoredKeys(cloneDeep(error.config))
+
+    if (error.config.headers) {
+      const headers = clone(error.config.headers)
+      if (headers.Cookie) {
+        headers.Cookie = headers.Cookie
+          .replace(/PHPSESSID=[^;]+;/g, 'PHPSESSID=REDACTED');
+      }
+      req.headers.headers = headers
+    }
+
     console.error('Request failed with no response', req)
 
-    // let headersList = {}
-    // if (error.config.headers) {
-    //   const headers = clone(error.config.headers)
-    //   if (headers.Cookie) {
-    //     headers.Cookie = headers.Cookie
-    //       .replace(/PHPSESSID=[^;]+;/g, 'PHPSESSID=REDACTED');
-    //   }
-    //   headersList = headers
-    // }
+
     //
     // let dataObject = ''
     // const data = clone(error.config.data)
@@ -87,9 +89,8 @@ const responseErrorHandler = async error => {
     //   headers: headersList,
     //   data: dataObject
     // })
-
   } else {
-    console.error('Error while making request', error.message);
+    console.error('Error while making request', error);
   }
 
   if (error && error.response) {
