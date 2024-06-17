@@ -16,6 +16,7 @@ import FormData from 'form-data'
 
 // Set cookies
 Axios.defaults.withCredentials = true
+Axios.defaults.timeout = 1500
 
 // Create axios
 const axios = Axios.create()
@@ -71,7 +72,7 @@ const responseErrorHandler = async error => {
       req.headers.headers = headers
     }
 
-    console.error('Request failed with no response', req)
+    console.error('Request failed with no response', error.message, req)
 
 
     //
