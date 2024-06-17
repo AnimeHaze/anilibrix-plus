@@ -244,32 +244,29 @@ export const handleRand = () => {
 export const invokeGetTitleV3 = (url) => ipcRenderer.invoke(APP_GET_TITLE_V3, url)
 export const handleGetTitleV3 = () => {
   ipcMain.handle(APP_GET_TITLE_V3, async (event, filter) => {
-    const response = Promise.any([
-      axios.get('https://api.wwnd.space/v3/title?' + filter).then(x => x.data),
-      axios.get('https://api.anilibria.tv/v3/title?' + filter).then(x => x.data)
-    ])
+    let response
+    try {
+      response = await axios.get('https://api.anilibria.tv/v3/title?' + filter).then(x => x.data)
+    } catch (e) {
+      response = await axios.get('https://api.wwnd.space/v3/title?' + filter).then(x => x.data)
+    }
 
-    response.catch(x => {
-      console.log('handleGetTitleV3', x)
-    })
-
-    return await response
+    return response
   })
 }
 
 export const invokeGetTitleV2 = (url) => ipcRenderer.invoke(APP_GET_TITLE_V2, url)
 export const handleGetTitleV2 = () => {
   ipcMain.handle(APP_GET_TITLE_V2, async (event, rId) => {
-    const response = Promise.any([
-      axios.get(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data),
-      axios.get(`https://api.anilibria.tv/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data)
-    ])
+    let response
 
-    response.catch(x => {
-      console.log('handleGetTitleV2', x)
-    })
+    try {
+      response = await axios.get(`https://api.wwnd.space/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data)
+    } catch (e) {
+      response = await axios.get(`https://api.anilibria.tv/v2/getTitle?id=${rId}&filter=player.playlist&playlist_type=array`).then(x => x.data)
+    }
 
-    return await response
+    return response
   })
 }
 
