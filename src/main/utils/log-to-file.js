@@ -21,8 +21,6 @@ export function consoleLogToFile({ logFilePath, formatter = defaultFormatter, in
 
   const logFileStream = fs.createWriteStream(logFilePath, { flags });
 
-  console.log(logFileStream)
-
   console.log = function (...args) {
     originalLog.apply(console, args);
     logToFile('log', args);
