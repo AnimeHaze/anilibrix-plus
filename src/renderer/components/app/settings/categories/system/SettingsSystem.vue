@@ -172,25 +172,25 @@
 
 
     <!-- Ads -->
-    <v-card class="mt-2">
-      <v-list-item dense @click="_setAds(!_ads)">
-        <v-list-item-title>Показывать рекламу</v-list-item-title>
-        <v-list-item-action class="mr-2">
-          <v-switch :input-value="_ads" @change="_setAds"/>
-        </v-list-item-action>
-      </v-list-item>
-      <v-card-text class="pt-2 caption">
-        <div>Спасибо, что выбрали <b>Анилибрию!</b></div>
-        <div>
-          Мы понимаем, что реклама никому не нравится, но это бесплатный способ поддержать проект.
-          Отключение рекламы - абсолютно бесплатно, но, если вы хотите поддержать нас, то оставьте рекламу включенной.
-          Обещаем, что не будем сильно навязчивыми (✿◠‿◠)
-        </div>
-      </v-card-text>
-    </v-card>
+<!--    <v-card class="mt-2">-->
+<!--      <v-list-item dense @click="_setAds(!_ads)">-->
+<!--        <v-list-item-title>Показывать рекламу</v-list-item-title>-->
+<!--        <v-list-item-action class="mr-2">-->
+<!--          <v-switch :input-value="_ads" @change="_setAds"/>-->
+<!--        </v-list-item-action>-->
+<!--      </v-list-item>-->
+<!--      <v-card-text class="pt-2 caption">-->
+<!--        <div>Спасибо, что выбрали <b>Анилибрию!</b></div>-->
+<!--        <div>-->
+<!--          Мы понимаем, что реклама никому не нравится, но это бесплатный способ поддержать проект.-->
+<!--          Отключение рекламы - абсолютно бесплатно, но, если вы хотите поддержать нас, то оставьте рекламу включенной.-->
+<!--          Обещаем, что не будем сильно навязчивыми (✿◠‿◠)-->
+<!--        </div>-->
+<!--      </v-card-text>-->
+<!--    </v-card>-->
 
     <!-- Ads Maximum -->
-    <v-card class="mt-2">
+<!--    <v-card class="mt-2">
       <v-list-item dense @click="_setAdsMaximum(!_ads_maximum)">
         <v-list-item-title>Показывать рекламу перед каждым эпизодом</v-list-item-title>
         <v-list-item-action class="mr-2">
@@ -201,7 +201,7 @@
         <div>Максимальная поддержка проекта!</div>
         <div>Реклама будет показываться перед каждым просмотром любого эпизода</div>
       </v-card-text>
-    </v-card>
+    </v-card>-->
 
     <div v-show="_isAuthorized" class="pa-4 caption grey--text">
       <div class="body-1">Снапшоты</div>
