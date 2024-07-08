@@ -11,6 +11,7 @@ const SET_API_STATIC_ENDPOINT = 'SET_API_STATIC_ENDPOINT'
 const SET_PROXY = 'SET_PROXY'
 const SET_TORRENT_TYPE = 'SET_TORRENT_TYPE'
 const SET_DRPC = 'SET_DRPC'
+const SET_IGNORE_CERTS = 'SET_IGNORE_CERTS'
 
 export default {
   namespaced: true,
@@ -36,12 +37,14 @@ export default {
     },
     torrentType: 'magnet',
     drpc_enabled: true,
-    proxy: ''
+    proxy: '',
+    ignore_certs: false
   },
 
   mutations: {
     [SET_TORRENT_TYPE]: (s, state) => (s.torrentType = state),
     [SET_DRPC]: (s, state) => (s.drpc_enabled = state),
+    [SET_IGNORE_CERTS]: (s, state) => (s.ignore_certs = state),
     [SET_API_ENDPOINT]: (s, state) => (s.api.endpoint = state),
     [SET_API_STATIC_ENDPOINT]: (s, state) => (s.api.static_endpoint = state),
     [SET_PROXY]: (s, state) => (s.proxy = state),
@@ -200,6 +203,7 @@ export default {
     // eslint-disable-next-line camelcase
     setFilterNotify: ({ commit }, filter_notify) => commit(SET_FILTER_NOTIFY, filter_notify),
     setTorrentType: ({ commit }, type) => commit(SET_TORRENT_TYPE, type),
-    setDRPC: ({ commit }, type) => commit(SET_DRPC, type)
+    setDRPC: ({ commit }, type) => commit(SET_DRPC, type),
+    setIgnoreCerts: ({ commit }, type) => commit(SET_IGNORE_CERTS, type)
   }
 }

@@ -49,6 +49,18 @@
       </v-card-text>
     </v-card>
 
+    <v-card class="mt-2">
+      <v-list-item dense @click="_setIgnoreCerts(!_ignore_certs)">
+        <v-list-item-title>Игнорировать ошибки сертификатов</v-list-item-title>
+        <v-list-item-action class="mr-2">
+          <v-switch :input-value="_ignore_certs" @change="_setIgnoreCerts"/>
+        </v-list-item-action>
+      </v-list-item>
+      <v-card-text class="pt-2 caption">
+        Игнорирование проверки доверенных сертификатов
+      </v-card-text>
+    </v-card>
+
     <v-card>
       <v-card-text class="mt-2">
         <v-text-field
@@ -64,7 +76,6 @@
           <div>
             Прокси для подключения к серверу статики и API. Поддерживается HTTP и HTTPS
           </div>
-
           <div>
             <b>После изменения точки доступа рекомендуется перезагрузить приложение</b>
           </div>
@@ -265,7 +276,8 @@ export default {
       _appbar_right: s => s.appbar_right,
       _filter_notify: s => s.filter_notify,
       _drpc_enabled: s => s.drpc_enabled,
-      _proxy: s => s.proxy
+      _proxy: s => s.proxy,
+      _ignore_certs: s => s.ignore_certs
     }),
   },
 
@@ -293,7 +305,8 @@ export default {
       _setAppbarRight: 'setAppbarRight',
       _setFilterNotify: 'setFilterNotify',
       _setDRPC: 'setDRPC',
-      _setProxy: 'setProxy'
+      _setProxy: 'setProxy',
+      _setIgnoreCerts: 'setIgnoreCerts'
     })
   },
 

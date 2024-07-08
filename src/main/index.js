@@ -1,6 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron'
 import proxy from 'node-global-proxy';
-
+import { execFile } from 'child_process'
 // Main process
 import path from 'path'
 
@@ -38,7 +38,6 @@ import { broadcastTorrentEvents } from '@main/handlers/torrents/torrentsHandler'
 import Tray from './utils/tray'
 import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
-import { showAppError } from '@main/handlers/notifications/notificationsHandler';
 import { consoleLogToFile } from '@main/utils/log-to-file';
 import { debounce } from 'lodash';
 let proxyServer
@@ -82,7 +81,6 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\') // eslint-disable-line
 }
 
-app.commandLine.appendSwitch('ignore-certificate-errors')
 // Add command lines arguments
 app.commandLine.appendSwitch('disable-site-isolation-trials')
 app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
@@ -90,7 +88,7 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
 
 process.on('uncaughtException', error => {
   console.log('Unhandled Error', error)
-}) 
+})
 
 process.on('unhandledRejection', error => {
   console.log('Unhandled Promise Rejection', error);
@@ -146,6 +144,36 @@ app.on('web-contents-created', (event, webContents) => {
 
 // App ready handler
 app.on('ready', async () => {
+  app.on('certificate-error', (event, webContents, url, error, certificate, callback) => {
+    if (store.state.app.settings.system.ignore_certs) {
+      // Verification logic.
+      event.preventDefault()
+      console.log('Certificate error ignored', url, error)
+      callback(true)
+    } else {
+      callback(false)
+    }
+  })
+
+  globalShortcut.register('CmdOrCtrl+shift+R', () => {
+    console.log('Restart')
+
+    const options = {
+      args: process.argv.slice(1).concat(['--relaunch']),
+      execPath: process.execPath
+    };
+    // Fix for .AppImage
+    if (app.isPackaged && process.env.APPIMAGE) {
+      execFile(process.env.APPIMAGE, options.args);
+      app.quit()
+
+      return
+    }
+
+    app.relaunch()
+    app.exit()
+  })
+
   consoleLogToFile({
     logFilePath: path.join(app.getPath('userData') + '/anilibrix.log')
   })
