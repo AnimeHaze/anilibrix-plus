@@ -42,7 +42,7 @@ import { showAppError } from '@main/handlers/notifications/notificationsHandler'
 import { consoleLogToFile } from '@main/utils/log-to-file';
 import { debounce } from 'lodash';
 let proxyServer
-
+app.commandLine.appendSwitch('--no-sandbox')
 const proxyServerValue = store.state.app.settings.system.proxy
 console.log('Load proxy ', proxyServerValue)
 
