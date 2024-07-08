@@ -1,5 +1,5 @@
-import fs from 'fs';
 import util from 'util';
+import stream from 'logrotate-stream';
 
 function defaultFormatter(level, args) {
   return `${new Date().toISOString()} [${level}] ` + [...args].map((item) => util.inspect(item)).join(' ') + '\n';
@@ -9,7 +9,7 @@ function defaultFormatter(level, args) {
  *
  * @param {*} param0
  */
-export function consoleLogToFile({ logFilePath, formatter = defaultFormatter, includes = [], flags = 'a' }) {
+export function consoleLogToFile({ logFilePath, formatter = defaultFormatter, includes = [] }) {
   const originalLog = console.log;
   const originalWarn = console.warn;
   const originalError = console.error;
@@ -19,7 +19,7 @@ export function consoleLogToFile({ logFilePath, formatter = defaultFormatter, in
     throw new Error('"logFilePath" is required');
   }
 
-  const logFileStream = fs.createWriteStream(logFilePath, { flags });
+  const logFileStream = stream({ file: logFilePath, size: '40m', keep: 3 })
 
   console.log = function (...args) {
     originalLog.apply(console, args);

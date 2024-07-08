@@ -2446,6 +2446,7 @@ __metadata:
     isomorphic-fetch: ^3.0.0
     lethargy: ^1.0.9
     lodash: ^4.17.19
+    logrotate-stream: ^0.2.9
     matroska-subtitles: ^3.3.2
     mini-css-extract-plugin: 0.9.0
     moment: ^2.24.0
@@ -4888,6 +4889,13 @@ __metadata:
   version: 3.0.0
   resolution: "builtin-status-codes@npm:3.0.0"
   checksum: 1119429cf4b0d57bf76b248ad6f529167d343156ebbcc4d4e4ad600484f6bc63002595cbb61b67ad03ce55cd1d3c4711c03bbf198bf24653b8392420482f3773
+  languageName: node
+  linkType: hard
+
+"byt@npm:~0.1.0":
+  version: 0.1.0
+  resolution: "byt@npm:0.1.0"
+  checksum: 585ac8cecc21227330d7639e1e2e79010aafb80c1fdc1e0eea17bd2c16cf4632167efb642f0014ea31a3a0c1319dc4210fb5f095e102170c35720e2e9d2e7814
   languageName: node
   linkType: hard
 
@@ -10965,6 +10973,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"log-rotate@npm:~0.2.8":
+  version: 0.2.8
+  resolution: "log-rotate@npm:0.2.8"
+  bin:
+    log-rotate: bin/log-rotate
+  checksum: 745bd2c05f5e65b1605117650abb89c2b72ea7a1d1bb5fc6c4feddaafda3fcdaa56c1c3395e4b000911e304a339c4b024821c98bedd65d544422c46354faf48c
+  languageName: node
+  linkType: hard
+
 "log-update@npm:^1.0.2":
   version: 1.0.2
   resolution: "log-update@npm:1.0.2"
@@ -10979,6 +10996,19 @@ __metadata:
   version: 1.8.1
   resolution: "loglevel@npm:1.8.1"
   checksum: a1a62db40291aaeaef2f612334c49e531bff71cc1d01a2acab689ab80d59e092f852ab164a5aedc1a752fdc46b7b162cb097d8a9eb2cf0b299511106c29af61d
+  languageName: node
+  linkType: hard
+
+"logrotate-stream@npm:^0.2.9":
+  version: 0.2.9
+  resolution: "logrotate-stream@npm:0.2.9"
+  dependencies:
+    byt: ~0.1.0
+    log-rotate: ~0.2.8
+    yargs: ~17.6.2
+  bin:
+    logrotate-stream: bin/logrotate-stream
+  checksum: 99cd86579cef7122a1415255275623b97097a225495896fa74fcd89551245e60c00cc071df16fb859e887dc6e82445930f28cb9cef6927f9851f9de04bb2f4cb
   languageName: node
   linkType: hard
 
@@ -17405,6 +17435,21 @@ __metadata:
     y18n: ^5.0.5
     yargs-parser: ^21.1.1
   checksum: 73b572e863aa4a8cbef323dd911d79d193b772defd5a51aab0aca2d446655216f5002c42c5306033968193bdbf892a7a4c110b0d77954a7fdf563e653967b56a
+  languageName: node
+  linkType: hard
+
+"yargs@npm:~17.6.2":
+  version: 17.6.2
+  resolution: "yargs@npm:17.6.2"
+  dependencies:
+    cliui: ^8.0.1
+    escalade: ^3.1.1
+    get-caller-file: ^2.0.5
+    require-directory: ^2.1.1
+    string-width: ^4.2.3
+    y18n: ^5.0.5
+    yargs-parser: ^21.1.1
+  checksum: 47da1b0d854fa16d45a3ded57b716b013b2179022352a5f7467409da5a04a1eef5b3b3d97a2dfc13e8bbe5f2ffc0afe3bc6a4a72f8254e60f5a4bd7947138643
   languageName: node
   linkType: hard
 
