@@ -52,9 +52,13 @@ export function discordActivity () {
   const interval = setInterval(() => {
     if (store.state.app.settings.system.drpc_enabled) {
       if (client && client.transport.socket) {
-        client.setActivity(activity)
-          .then(() => logger('Discord set activity', activity))
-          .catch(err => logger('Discord set activity error', err))
+        if (Object.keys(activity).length > 0) {
+          client.setActivity(activity)
+            .then(() => logger('Discord set activity', activity))
+            .catch(err => logger('Discord set activity error', err))
+        } else {
+          client.clearActivity()
+        }
       }
     } else {
       client.clearActivity()
