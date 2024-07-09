@@ -34,7 +34,7 @@
   },
   "build": {
     "productName": "AniLibrix Plus",
-    "artifactName": "${productName}-${os}-${arch}-${version}.${ext}",
+    "artifactName": "AniLibrixPlus-${os}-${arch}-${version}.${ext}",
     "appId": "com.anilibria.anilibrix",
     "directories": {
       "output": "release"
