@@ -1,5 +1,11 @@
 # AniLibrix Unoffical
 
+# АХТУНГ!!!
+
+Версии до ext13 включительно подвержены проблеме API с 14.07.24
+
+Временное решение - https://t.me/anilibrix_plus/308
+
 ### Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
 
 [![Загрузите из Snap Store](https://snapcraft.io/static/images/badges/ru/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
