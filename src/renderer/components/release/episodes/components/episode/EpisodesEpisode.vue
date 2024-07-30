@@ -76,7 +76,7 @@ export default {
 
   computed: {
     title() {
-      return this.episode.title + (this.episode.name ? ' — ' + this.episode.name : '')
+      return this.episode.title + (this.episode.sources.find(x => x.payload.playlist?.includes('/rutube/')) ? ' [RUTUBE] ' : '') + (this.episode.name ? ' — ' + this.episode.name : '')
     },
 
     time() {

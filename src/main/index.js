@@ -8,7 +8,7 @@ import { meta, version } from '@package'
 import sentry from './utils/sentry'
 // Store
 import store, { getStore, setUserId } from '@store'
-
+import express from "express"
 // Windows
 import { Main, Torrent } from './utils/windows'
 
@@ -40,6 +40,7 @@ import Menu from './utils/menu'
 import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor'
 import { consoleLogToFile } from '@main/utils/log-to-file';
 import { debounce } from 'lodash';
+import { catGirlFetch } from '../renderer/utils/fetch';
 let proxyServer
 app.commandLine.appendSwitch('--no-sandbox')
 const proxyServerValue = store.state.app.settings.system.proxy
@@ -227,6 +228,17 @@ app.on('ready', async () => {
   appHandlers() // App handlers
   torrentHandlers() // Torrent handler
   // downloadHandlers(); // Download handlers
+
+  const serv = express()
+  serv.get('/rutube/:id/*', (req, res) => {
+    catGirlFetch(`https://rutube.ru/api/play/options/${req.params.id}/?no_404=true&referer&pver=v2`, {}, 3000)
+      .then(x => {
+        res.redirect(x.video_balancer.m3u8)
+      })
+      .catch(x => res.status(500).send())
+  })
+
+  serv.listen(9384)
 })
 
 /**
