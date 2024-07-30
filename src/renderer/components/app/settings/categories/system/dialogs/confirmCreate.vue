@@ -57,8 +57,8 @@ export default {
     ...mapState('app/settings/system', {
       _updates_enabled: s => s.updates.enabled,
       _updates_timeout: s => s.updates.timeout,
-      _api_endpoint: s => s.api.endpoint,
-      _static_endpoint: s => s.api.static_endpoint,
+      _api_endpoint: s => s.api._endpoint,
+      _static_endpoint: s => s.api._static_endpoint,
       _notifications_system: s => s.notifications.system,
     }),
     ...mapState('app/account', {

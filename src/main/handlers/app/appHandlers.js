@@ -216,7 +216,7 @@ export const invokeRand = () => ipcRenderer.invoke(APP_RAND)
  */
 export const handleRand = () => {
   ipcMain.handle(APP_RAND, async (event) => {
-    const endpoint = require('@store/index').default?.state?.app?.settings?.system?.api?.endpoint
+    const endpoint = require('@store/index').default?.state?.app?.settings?.system?.apiEndpoint
     const { hostname } = new URL(endpoint)
     const parts = hostname.split('.')
     if (parts.length > 2) {

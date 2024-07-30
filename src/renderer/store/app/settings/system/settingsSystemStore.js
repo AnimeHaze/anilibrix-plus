@@ -13,6 +13,14 @@ const SET_TORRENT_TYPE = 'SET_TORRENT_TYPE'
 const SET_DRPC = 'SET_DRPC'
 const SET_IGNORE_CERTS = 'SET_IGNORE_CERTS'
 
+function normalizeEndpoint (endpoint) {
+  if (endpoint.endsWith('/')) {
+    return endpoint.slice(0, -1)
+  }
+
+  return endpoint.replace(/([^:]\/)\/+/g, '$1')
+}
+
 export default {
   namespaced: true,
   state: {
@@ -29,8 +37,8 @@ export default {
       timeout: 10
     },
     api: {
-      endpoint: process.env.API_ENDPOINT_URL,
-      static_endpoint: process.env.STATIC_ENDPOINT_URL
+      _endpoint: process.env.API_ENDPOINT_URL,
+      _static_endpoint: process.env.STATIC_ENDPOINT_URL
     },
     notifications: {
       system: true
@@ -40,13 +48,20 @@ export default {
     proxy: '',
     ignore_certs: false
   },
-
+  getters: {
+    apiEndpoint: state => {
+      return normalizeEndpoint(state.api?._endpoint || process.env.API_ENDPOINT_URL);
+    },
+    staticEndpoint: state => {
+      return normalizeEndpoint(state.api?._static_endpoint || process.env.STATIC_ENDPOINT_URL);
+    }
+  },
   mutations: {
     [SET_TORRENT_TYPE]: (s, state) => (s.torrentType = state),
     [SET_DRPC]: (s, state) => (s.drpc_enabled = state),
     [SET_IGNORE_CERTS]: (s, state) => (s.ignore_certs = state),
-    [SET_API_ENDPOINT]: (s, state) => (s.api.endpoint = state),
-    [SET_API_STATIC_ENDPOINT]: (s, state) => (s.api.static_endpoint = state),
+    [SET_API_ENDPOINT]: (s, state) => (s.api._endpoint = state),
+    [SET_API_STATIC_ENDPOINT]: (s, state) => (s.api._static_endpoint = state),
     [SET_PROXY]: (s, state) => (s.proxy = state),
     /**
      * Set updates state
@@ -119,7 +134,6 @@ export default {
     [SET_ADS_MAXIMUM]: (s, state) => (s.ads.maximum = state)
 
   },
-
   actions: {
 
     /**
