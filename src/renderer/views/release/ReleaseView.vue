@@ -3,7 +3,7 @@
 
     <!-- Release Card -->
     <card v-bind="{loading}" class="mb-2" :release="__release"/>
-    <v-card v-if="franchises.length && !loading" flat color="transparent" class="mb-6">
+    <v-card v-if="franchises.length && !loadingAdditional" flat color="transparent" class="mb-6">
       <v-card-title>Связанное</v-card-title>
       <v-list three-line>
         <template v-for="(item, index) in franchises">
@@ -97,6 +97,7 @@ export default {
     return {
       tab: 0,
       loading: false,
+      loadingAdditional: true,
       franchises: [],
       dates: {},
       team: null
@@ -176,6 +177,7 @@ export default {
       return router
     },
     async fetchAdditional() {
+      this.loadingAdditional = true
       try {
         const { franchises, team } = await this.loadFranchisesAndTeam()
 
@@ -184,9 +186,11 @@ export default {
         const additionalData = await this.loadAdditionalData(releaseIds)
 
         this.franchises = this.formatFranchises(franchises, additionalData)
+        this.loadingAdditional = false
       } catch (error) {
         console.error(error)
         this.$toasted.error('Ошибка загрузки связанных данных')
+        this.loadingAdditional = false
       }
     },
 
@@ -256,9 +260,8 @@ export default {
           // Get release data
           this.loading = true
           await this.$store.dispatchPromise('release/getRelease', releaseId)
-          await this.fetchAdditional(releaseId)
+          this.fetchAdditional(releaseId)
           this.loading = false
-
         }
       }
     }

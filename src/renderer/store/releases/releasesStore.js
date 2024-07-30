@@ -182,7 +182,7 @@ export default {
         if (!axios.isCancel(error)) {
           // Set release has error
           commit(SET_RELEASES_HAS_ERROR, true)
-
+          console.log(error)
           // Show error
           // Throw error
           showAppError('Произошла ошибка при загрузке релизов')
@@ -223,6 +223,7 @@ export default {
         if (!axios.isCancel(error)) {
           // Show app error
           // Return empty array
+          console.log(error)
           showAppError('Произошла ошибка при поиске релизов')
           return []
         }
