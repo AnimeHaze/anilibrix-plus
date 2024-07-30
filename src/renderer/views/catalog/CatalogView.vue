@@ -46,6 +46,7 @@ import Release from './components/release'
 
 import { toRelease } from '@utils/router/views'
 import { mapActions, mapState } from 'vuex'
+import {nextTick} from "vue";
 
 export default {
   name: 'Catalog.View',
@@ -131,16 +132,18 @@ export default {
 
   beforeRouteEnter (to, from, next) {
     next(vm => {
-      if (from && from.name === 'release') {
-        const fromReleaseId = vm.$__get(from, 'params.releaseId')
-        const releaseContainer = vm.$refs[fromReleaseId]
-
-        // If div container is found
-        // Scroll into view
-        if (releaseContainer && releaseContainer[0]) {
-          releaseContainer[0].$el.scrollIntoView({ block: 'center' })
-        }
-      }
+        nextTick(() => {
+          if (from && from.name === 'release') {
+            const fromReleaseId = vm.$__get(from, 'params.releaseId')
+            const releaseContainer = vm.$refs[fromReleaseId]
+            console.log(fromReleaseId, releaseContainer, releaseContainer[0].scrollIntoView)
+            // If div container is found
+            // Scroll into view
+            if (releaseContainer && releaseContainer[0]) {
+              releaseContainer[0].$el.scrollIntoView({ block: 'center' })
+            }
+          }
+        })
     })
   },
 
