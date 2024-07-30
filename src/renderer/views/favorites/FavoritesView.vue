@@ -29,8 +29,8 @@
 
     <!-- Favorites loader -->
     <!-- Favorites View -->
-    <loader v-if="_loading" class="my-2"/>
-    <component v-else v-bind="{releases}" class="my-2" :is="view" @toRelease="toRelease"/>
+    <loader v-if="_loading && !releases.length" class="my-2"/>
+    <component v-if="!_loading || releases.length" v-bind="{releases}" class="my-2" :is="view" @toRelease="toRelease"/>
 
   </v-layout>
 
