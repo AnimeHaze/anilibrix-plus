@@ -83,7 +83,7 @@ import screenfull from 'screenfull'
 import { AppKeyboardHandlerMixin, AppMouseHandlerMixin } from '@mixins/app'
 import { mapActions, mapState } from 'vuex'
 import { catGirlFetch } from '@utils/fetch'
-import {invokeGetTitleV2} from "@main/handlers/app/appHandlers";
+import {invokeGetTitleV1New, invokeGetTitleV2} from "@main/handlers/app/appHandlers";
 
 const props = {
   player: {
@@ -320,15 +320,14 @@ export default {
     try {
       const epId = this.$__get(this.episode, 'id')
       const rId = this.$__get(this.release, 'id')
-      const { player: playlist } = invokeGetTitleV2(rId)
-      const serie = playlist.playlist.find(x => x.serie === epId)
+
+      const { episodes } = await invokeGetTitleV1New(rId)
+
+      const serie = episodes.find(x => x.ordinal.toString() === epId.toString())
 
       if (serie) {
-        Object.values(serie.skips).forEach(skip => {
-          if(skip.length === 2) {
-            this.skips.push({start: skip[0], end: skip[1]})
-          }
-        });
+        if (serie.ending) this.skips.push({ start: serie.ending.start, end: serie.ending.stop })
+        if (serie.opening) this.skips.push({ start: serie.opening.start, end: serie.opening.stop })
       }
     } catch (e) {
       console.log(e)

@@ -39,6 +39,8 @@ export const APP_CHECK_API_ENDPOINT = 'app:check_api_endpoint'
 
 export const APP_RAND = 'app:rand'
 export const APP_GET_TITLE_V2 = 'app:get_title_v2'
+
+export const APP_GET_TITLE_V1_NEW = 'app:get_title_v1new'
 export const APP_GET_TITLE_V3 = 'app:get_title_v3'
 
 export const APP_TORRENT_PARSE = 'app:torrent_parse'
@@ -267,6 +269,13 @@ export const handleGetTitleV2 = () => {
     }
 
     return response
+  })
+}
+
+export const invokeGetTitleV1New = (url) => ipcRenderer.invoke(APP_GET_TITLE_V1_NEW, url)
+export const handleGetTitleV1New = () => {
+  ipcMain.handle(APP_GET_TITLE_V1_NEW, async (event, rId) => {
+    return await axios.get(`https://anilibria.top/api/v1/anime/releases/` + rId).then(x => x.data)
   })
 }
 
