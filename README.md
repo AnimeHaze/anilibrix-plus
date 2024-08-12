@@ -103,3 +103,7 @@ yarn run release:win
 # Build for Linux
 yarn run release:lin
 ```
+
+---
+
+#### English translation by: [TomerGamerTV](https://github.com/TomerGamerTV) 😉
