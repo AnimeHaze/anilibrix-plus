@@ -3,10 +3,10 @@
       <v-btn depressed class="btn">
         <div class="progress" :style="'width: ' + this.progress + '%;'"></div>
         <div class="d-flex justify-center align-center px-4 fill-height full-width" @click="skip">
-          Пропустить
+          Skip
         </div>
       </v-btn>
-      <v-btn class="ml-2" text depressed @click="cancel">Смотреть</v-btn>
+      <v-btn class="ml-2" text depressed @click="cancel">Look</v-btn>
     </div>
 </template>
 
@@ -83,7 +83,7 @@ export default {
     //  * @return void
     //  */
     showToast() {
-      this.$toasted.show('Метка пропущена', {
+      this.$toasted.show('Marker missing', {
         type: 'info',
         position: 'top-center'
       })

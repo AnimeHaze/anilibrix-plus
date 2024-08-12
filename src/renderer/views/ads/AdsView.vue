@@ -21,7 +21,7 @@ const props = {
 export default {
   props,
   name: 'Ads.View',
-  meta: { title: 'Реклама' },
+  meta: { title: 'Advertising' },
   components: {
     AppToolBar
   },

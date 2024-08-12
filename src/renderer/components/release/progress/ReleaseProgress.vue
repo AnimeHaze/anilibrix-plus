@@ -13,20 +13,20 @@
 
         <!-- Complete All Episodes -->
         <span v-if="isComplete">
-          <span v-if="!dense">Просмотрены все эпизоды</span>
-          <span v-else>Все эпизоды</span>
+          <span v-if="!dense">All episodes watched</span>
+          <span v-else>All episodes</span>
         </span>
 
         <!-- Not seen episodes -->
         <span v-else-if="isUnseen">
-          <span v-if="!dense">Не просмотрено ни одного эпизода</span>
-          <span v-else>Ни одного эпизода</span>
+          <span v-if="!dense">Not a single episode has been watched</span>
+          <span v-else>Not a single episode</span>
         </span>
 
         <!-- Episodes Progress -->
         <span v-else>
-          <span v-if="!dense">Просмотрено {{ watched }} из {{ episodes.length }}</span>
-          <span v-else>{{ watched }} из {{ episodes.length }}</span>
+          <span v-if="!dense">Viewed {{ watched }} of {{ episodes.length }}</span>
+          <span v-else>{{ watched }} of {{ episodes.length }}</span>
         </span>
 
       </div>
@@ -118,7 +118,7 @@ export default {
       // Get watched episodes
       // Convert to string with suffix
       const watched_episodes = this.$store.getters['app/watch/getWatchedEpisodes'](payload)
-      return pluralize(watched_episodes.length, ['эпизод', 'эпизода', 'эпизодов'])
+      return pluralize(watched_episodes.length, ['episode', 'episode', 'episodes'])
 
     },
 

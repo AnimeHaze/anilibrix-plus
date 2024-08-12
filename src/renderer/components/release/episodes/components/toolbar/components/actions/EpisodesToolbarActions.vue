@@ -52,12 +52,12 @@ export default {
       return [
         {
           icon: 'mdi-check',
-          title: 'Отметить все серии как просмотренные',
+          title: 'Mark all episodes as watched',
           action: this.setWatched,
         },
         {
           icon: 'mdi-close',
-          title: 'Снять все отметки о просмотре',
+          title: 'Remove all viewing marks',
           action: this.removeWatched,
         }
       ]

@@ -281,12 +281,12 @@ export default {
 
           if (this._auto_opening_skip_key !== '' && this._auto_opening_skip_key === this.keysDown.join('+')) {
             if (this._auto_opening_skip) {
-              this.$toasted.show('Авто пропуск опенинга выключен', {
+              this.$toasted.show('Auto skip opening disabled', {
                 type: 'default',
                 position: 'top-center'
               })
             } else {
-              this.$toasted.show('Авто пропуск опенинга включен', {
+              this.$toasted.show('Auto skip opening enabled', {
                 type: 'success',
                 position: 'top-center'
               })

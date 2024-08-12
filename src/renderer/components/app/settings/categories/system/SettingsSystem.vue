@@ -2,10 +2,10 @@
   <div ref="settings">
 
     <div class="pa-4 caption grey--text">
-      <div class="body-1">Настройки приложения</div>
+      <div class="body-1">Application settings</div>
       <div>
-        В данном разделе вы можете настроить автоматическое обновление релизов, системные уведомления
-        и другие параметры приложения
+        In this section, you can configure automatic release updates, system notifications
+and other application parameters
       </div>
     </div>
 
@@ -14,7 +14,7 @@
       <v-card class="mt-2">
         <v-list-item dense @click="_setAppbarRight(!_appbar_right)">
           <v-list-item-title>
-            Переместить кнопки контроля вправо
+            Move the control buttons to the right
           </v-list-item-title>
 
           <v-list-item-action class="mr-2">
@@ -24,7 +24,7 @@
 
         <v-card-text class="pt-2">
           <div class="caption">
-            Перемещает кнопки упралвления окном (свернуть, закрыть и развернуть) вправо
+            Move window control buttons (minimize, close and maximize) to the right
           </div>
         </v-card-text>
       </v-card>
@@ -34,7 +34,7 @@
     <v-card class="mt-2">
       <v-list-item dense @click="_setFilterNotify(!_filter_notify)">
         <v-list-item-title>
-          Фильтровать уведомления по избранному
+          Filter notifications by favorites
         </v-list-item-title>
 
         <v-list-item-action class="mr-2">
@@ -44,20 +44,20 @@
 
       <v-card-text class="pt-2">
         <div class="caption">
-          Включает показ уведомлений только для релизов из избранного
+          Enables displaying notifications only for releases from favorites
         </div>
       </v-card-text>
     </v-card>
 
     <v-card class="mt-2">
       <v-list-item dense @click="_setIgnoreCerts(!_ignore_certs)">
-        <v-list-item-title>Игнорировать ошибки сертификатов</v-list-item-title>
+        <v-list-item-title>Ignore certificate errors</v-list-item-title>
         <v-list-item-action class="mr-2">
           <v-switch :input-value="_ignore_certs" @change="_setIgnoreCerts"/>
         </v-list-item-action>
       </v-list-item>
       <v-card-text class="pt-2 caption">
-        Игнорирование проверки доверенных сертификатов
+        Ignoring Trusted Certificate Checking
       </v-card-text>
     </v-card>
 
@@ -68,16 +68,16 @@
           class="mb-2"
           :value="_proxy"
           @input="setProxyServer($event)"
-          label="Прокси сервер"
+          label="Proxy server"
           persistent-hint
         />
 
         <div class="caption">
           <div>
-            Прокси для подключения к серверу статики и API. Поддерживается HTTP и HTTPS
+            Proxy for connecting to static and API server. HTTP and HTTPS supported
           </div>
           <div>
-            <b>После изменения точки доступа рекомендуется перезагрузить приложение</b>
+            <b>After changing the access point, it is recommended to restart the application</b>
           </div>
         </div>
       </v-card-text>
@@ -91,7 +91,7 @@
           :value="_api_endpoint"
           @input="_setAPIEndpoint($event ? $event : process.env.API_ENDPOINT_URL)"
           :items="['https://anilibria.tv/', 'https://wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/', 'https://anilibria.animehaze.me/']"
-          label="Точка подключения к API"
+          label="API connection point"
           persistent-hint
         />
 
@@ -101,17 +101,17 @@
           :value="_static_endpoint"
           @input="_setAPIStaticEndpoint($event ? $event : process.env.STATIC_ENDPOINT_URL)"
           :items="['https://static-libria.weekstorm.one/', 'https://static.anilibria.tv/', 'https://static.wwnd.space/', 'https://anilibriaqt.anilib.top/', 'https://anilibrix.anilib.top/', 'https://anilibria.animehaze.me/']"
-          label="Точка подключения к серверу статики"
+          label="Connection point to the static server"
           persistent-hint
         />
 
         <div class="caption">
-          Вы можете использовать основной домен, если он не заблокирован вашим провайдером, или использовать
-          дополнительные домены
+          You can use the main domain if it is not blocked by your provider, or use
+          additional domains
 
-          Вы можете ввесли свю точку подключения к API и серверу статики в поле "Точка подключения к API" и "Точка подключения к серверу статики"
+          You can enter your connection point to the API and the static server in the "API connection point" and "Static server connection point" fields
 
-          <b>После изменения точки доступа рекомендуется перезагрузить приложение</b>
+        <b>After changing the access point, it is recommended to restart the application</b>
         </div>
       </v-card-text>
     </v-card>
@@ -124,7 +124,7 @@
         </v-list-item-action>
       </v-list-item>
       <v-card-text class="pt-2 caption">
-        Приложение будет выводть информацию о просматриваемом релизе в Discord Rich Presence
+        The app will display information about the anime being viewed in Discord Rich Presence
       </v-card-text>
     </v-card>
     <v-divider/>
@@ -132,15 +132,15 @@
     <!-- System Notifications -->
     <v-card>
       <v-list-item dense @click="_setSystemNotifications(!_notifications_system)">
-        <v-list-item-title>Показывать системные уведомления</v-list-item-title>
+        <v-list-item-title>Show system notifications</v-list-item-title>
         <v-list-item-action class="mr-2">
           <v-switch :input-value="_notifications_system" @change="_setSystemNotifications"/>
         </v-list-item-action>
       </v-list-item>
       <v-card-text class="pt-2">
         <div class="caption">
-          Если при загрузке последних релизов приложение обнаружит обновленный релиз,
-          то оно покажет системное уведомление о новом эпизоде
+          “If the app detects an update while downloading the latest releases, 
+          it will display a system notification about the new episode.
         </div>
       </v-card-text>
     </v-card>
@@ -149,13 +149,13 @@
     <!-- Auto update -->
     <v-card class="mt-2">
       <v-list-item dense @click="_setUpdates(!_updates_enabled)">
-        <v-list-item-title>Автоматическое обновление релизов</v-list-item-title>
+        <v-list-item-title>Automatic release update</v-list-item-title>
         <v-list-item-action class="mr-2">
           <v-switch :input-value="_updates_enabled" @change="_setUpdates"/>
         </v-list-item-action>
       </v-list-item>
       <v-card-text class="pt-2 caption">
-        Приложение будет в фоне обновлять последние релизы, даже если оно свернуто
+        The app will update the latest releases in the background, even if it is minimized
       </v-card-text>
     </v-card>
     <v-divider/>
@@ -164,7 +164,7 @@
     <v-card>
       <v-card-text class="pb-2">
         <div class="caption">
-          Вы можете указать с какой периодичностью приложение будет обновлять релизы в фоновом режиме
+          You can specify how often the application will update releases in the background
         </div>
       </v-card-text>
       <v-card-text>
@@ -173,8 +173,8 @@
           hide-details
           class="mb-2"
           type="number"
-          label="Периодичность обновления релизов"
-          suffix="мин"
+          label="Frequency of release updates"
+          suffix="min"
           :value="_updates_timeout"
           @input="_setUpdatesTimeout($event ? parseInt($event) : 1)">
         </v-text-field>
@@ -215,8 +215,8 @@
     </v-card>-->
 
     <div v-show="_isAuthorized" class="pa-4 caption grey--text">
-      <div class="body-1">Снапшоты</div>
-      <div>Вы можете создавать резервные копии данных приложения привязанные к вашему аккаунту анилибрии</div>
+      <div class="body-1">Snapshots</div>
+      <div>You can create backup copies of application data linked to your anilibria account</div>
     </div>
 
     <v-card v-show="_isAuthorized">
@@ -224,7 +224,7 @@
         <template>
           <v-list-item @click="snapshots">
             <v-list-item-content>
-              <v-list-item-title v-text="'Список снапшотов'"/>
+              <v-list-item-title v-text="'List of snapshots'"/>
             </v-list-item-content>
           </v-list-item>
         </template>

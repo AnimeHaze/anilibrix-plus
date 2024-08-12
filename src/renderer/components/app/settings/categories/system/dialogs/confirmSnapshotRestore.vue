@@ -6,11 +6,11 @@
   >
     <v-card>
       <v-card-title className="text-h5">
-        ПРЕДУПРЕЖДЕНИЕ
+        WARNING
       </v-card-title>
       <v-card-text>
-        Вы действительно хотите восстановить данные из снапшота?
-        Данное действие нельзя отменить, текущие данные будут заменены данным из снапшота
+        Do you really want to restore data from the snapshot?
+        This action cannot be canceled, the current data will be replaced by data from the snapshot
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -20,7 +20,7 @@
           text
           v-on:click="restoreSnapshot"
         >
-          Да
+          Yes
         </v-btn>
         <v-btn
           :loading="loading"
@@ -28,7 +28,7 @@
           text
           v-on:click="visible = false"
         >
-          Отмена
+          Cancel
         </v-btn>
       </v-card-actions>
     </v-card>

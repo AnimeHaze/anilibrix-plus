@@ -32,7 +32,7 @@ const props = {
 
 export default {
   props,
-  meta: { title: `Видео не доступно` },
+  meta: { title: `Video is not available` },
   components: {
     BlankNoise
   },
@@ -45,7 +45,7 @@ export default {
      * @return {string}
      */
     text () {
-      return this.message || 'При загрузке эпизода произошла ошибка'
+      return this.message || 'There was an error loading the episode.'
     }
 
   },

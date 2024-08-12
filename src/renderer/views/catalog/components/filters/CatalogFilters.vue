@@ -32,18 +32,18 @@ export default {
       return [
         {
           is: Genres,
-          title: 'Жанры',
-          subtitle: 'Вы можете отфильтровать список релизов по указанным жанрам'
+          title: 'Genres',
+          subtitle: 'You can filter the list of releases by the specified genres'
         },
         {
           is: Years,
-          title: 'Период',
-          subtitle: 'Вы можете отфильтровать список релизов по годам выпуска'
+          title: 'Years',
+          subtitle: 'You can filter the list of releases by year of release.'
         },
         {
           is: Sort,
-          title: 'Сортировка',
-          subtitle: 'Вы можете отсортировть список релизов по популярности или новизне'
+          title: 'Sorting',
+          subtitle: 'You can sort the list of releases by popularity or newness'
         },
       ]
     }

@@ -33,7 +33,7 @@ import { AppKeyboardHandlerMixin } from '@mixins/app'
 
 export default {
   name: 'Releases.View',
-  meta: { title: 'Последние релизы' },
+  meta: { title: 'Latest releases' },
   mixins: [AppKeyboardHandlerMixin],
   components: {
     Error,
