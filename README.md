@@ -1,118 +1,109 @@
-# AniLibrix Unoffical
+# AniLibrix Unofficial
 
-# АХТУНГ!!!
+Versions up to and including ext13 are affected by an API issue as of 07/14/24.
 
-Версии до ext13 включительно подвержены проблеме API с 14.07.24
+Temporary solution - [https://t.me/anilibrix_plus/308](https://t.me/anilibrix_plus/308)
 
-Временное решение - https://t.me/anilibrix_plus/308
+### Desktop anime cinema from Anilibria for any of your computers.
 
-### Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
-
-[![Загрузите из Snap Store](https://snapcraft.io/static/images/badges/ru/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
+[![Download from Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/anilibrix-plus)
 
 ![Anilibrix](https://raw.githubusercontent.com/pavloniym/anilibrix/master/.github/assets/anilibrix.png)
 
-### Особенности не официальной версии (этой):
-* Вход через ВКонтакте
-* Авто пропуск опенинга
-* Можно делать резервные копии данных о просмотрах и восстанавливать при необходимости
-на другом устройстве, ничего не требуется, все с привязкой к аккаунту
-* Кнопка случайного релиза
-* Регулировка громкости увеличена с 10 до 20 делений
-* При повреждении конфиг файла приложение запускается и
-сбрасывает на конфиг по умолчанию (ранее в таком случае оно переставало запускаться)
-* Фикс засыпания / выключения экрана пк при просмотре аниме
-(у меня он был, выключался экран и блокировало)
-*  При переключении видео на следующую серию, переключается
-и видео в Picture-in-picture теперь не надо пере открывать этот режим
-* Вылетов из аккаунта меньше так как перед деавторизацией делаются попытки
-повторной авторизации для обновления сессионного идентификатора
-* Discord Rich Presence (трансляция активности просмотра аниме в дискорд)
-  - Показывает иконку приложения когда запущено приложение и постер и информацию о просматриваемом релизе:
-    - Номер текущей серии
-    - Общее кол-во серий
-    - Название
-    - Ссылка на релиз
-    - Ссылка на сайт либрии
-    - Сколько осталось времени до конца серии
-* Сохранение состояния окна (фулл скрин, минимизация, кординаты на экране)
-* Установка кастомного эндпоинта API (адреса API сервера Anilibria) и
-кастомного сервера статики (для получения картинок и постеров).
-Можно выбрать один из списка или же ввести какой-то свой.
-Может быть удобно если кого-то сервер недоступен и заблокирован провайдером.
-* Внизу в настройках появилась возможность нажать на кнопку для показа файла конфига
-в директории, может быть полезно если требуется перенести данные просмотров
-и статистики или сделать резервную копию для переноса на новую систему
-* Добавлена функция для перемещения кнопок системного бара в правую часть
-(по умолчанию расположение автоматическое)
-* Вывод связанных релизов
-* Вывод дат выхода в списке эпизодов
-* Поддержка rutube релизов в плеере приложения
-* Сортировка по популярности в избранном
-* Фильтр по "все статусы" в изрбанном и все кроме "в работе"
-* Добавлено кол-во у пользователей в избранном (типа рейтинг)
-* Вывод статуса в карточке релиза в избранном
-* Вывод людей работавших над релизом
-* Фильтр уведомлений по избранному
-* Постоянное отображение прогресса в избранном разными цветами (в зависиомсти от прогресса)
-* Исправлен баг с неверным отображением прогресса когда серии начинаются не с 1
-* Исправлен баг с пропаданием из избранного релизов-анонсов
-* Вывод списка торрентов с возможностью открытия в внешнем торрент клиенте
-* Убран круглый постер в пользу полного
-* Поддержка прокси (подробнее https://github.com/AnimeHaze/anilibrix-plus/releases/tag/v1.4.3-ext.11)
+### Features of the unofficial version (this one):
+* Login via VKontakte
+* Auto-skip of the opening theme
+* Ability to back up viewing data and restore it on another device if needed—no setup required, everything is tied to your account
+* Random release button
+* Volume adjustment increased from 10 to 20 levels
+* If the config file is corrupted, the app now launches and resets to the default config (previously, it would fail to launch)
+* Fix for PC screen sleep/shutdown while watching anime (my screen would turn off and lock)
+* When switching to the next episode, the video in Picture-in-Picture mode also switches, so you don't need to reopen this mode
+* Fewer logouts since reauthorization attempts are made to refresh the session identifier before deauthorization
+* Discord Rich Presence (broadcasting anime viewing activity to Discord)
+  - Shows the app icon when the app is running, as well as the poster and information about the release being viewed:
+    - Current episode number
+    - Total number of episodes
+    - Title
+    - Link to the release
+    - Link to the Anilibria site
+    - Time remaining until the end of the episode
+* Saving window state (fullscreen, minimized, screen coordinates)
+* Setting a custom API endpoint (Anilibria API server address) and custom static server (for fetching images and posters). You can select one from the list or enter your own. This may be convenient if a server is unavailable or blocked by your provider.
+* A new button in the settings allows you to open the config file in the directory, which may be useful if you need to transfer viewing data and statistics or make a backup for transfer to a new system
+* Added a function to move the system bar buttons to the right side (default is automatic placement)
+* Display of related releases
+* Display of release dates in the episode list
+* Support for Rutube releases in the app's player
+* Sorting by popularity in favorites
+* Filter by "all statuses" in favorites and everything except "in progress"
+* Added a user count in favorites (like a rating)
+* Display of release status in the release card in favorites
+* Display of people who worked on the release
+* Notification filtering by favorites
+* Persistent display of progress in favorites with different colors (depending on progress)
+* Fixed a bug with incorrect progress display when episodes don't start from 1
+* Fixed a bug with the disappearance of announcement releases from favorites
+* Display of torrent lists with the ability to open them in an external torrent client
+* Removed the round poster in favor of the full one
+* Proxy support (more details: [https://github.com/AnimeHaze/anilibrix-plus/releases/tag/v1.4.3-ext.11](https://github.com/AnimeHaze/anilibrix-plus/releases/tag/v1.4.3-ext.11))
 
-#### Анилибрия — так звучит аниме!
+#### Anilibria — this is how anime sounds!
 
-### Горячие клавиши плеера
+### Player hotkeys
 
-| Клавиша | Действие                               |
-|---------|----------------------------------------|
-| F       | Переключение полноэкранного режима     |
-| ←       | Назад                                  |
-| →       | Вперед                                 |
-| ↑       | Громкость больше (или колесиком мышки) |
-| ↓       | Громкость меньше (или колесиком мышки) |
-| space   | Воспроизведение / пауза                |
+| Key     | Action                                |
+|---------|---------------------------------------|
+| F       | Toggle fullscreen mode                |
+| ←       | Backward                              |
+| →       | Forward                               |
+| ↑       | Increase volume (or use mouse wheel)  |
+| ↓       | Decrease volume (or use mouse wheel)  |
+| space   | Play / Pause                          |
 
-Плюс кастомные клавиши на свое усмотрение которые устанавливаются в настроках для:
-- Включения выключени автопропуска опенинга не выходя из плеера
-- Пропуска опенинга
+Plus, custom keys of your choice can be set in the settings for:
+- Turning the auto-skip of the opening on/off without leaving the player
+- Skipping the opening
 
-### Сборка и запуск
+### Build and Run
 
-> Требуемая верси Node.JS - **14.18.0**
-> На других версиях (особенно выше) могут быть проблемы со сборкой нативных модулей
+> Required Node.JS version - **14.18.0**  
+> Other versions (especially newer ones) may cause issues with building native modules.
 >
-> Чертов сраный легаси проще переписать с нуля...
+> Damn legacy code, easier to rewrite from scratch...
 
-Перед запуском не забудьте скопировать и отредактировать пример `.env` файла:
+Before launching, don't forget to copy and edit the sample `.env` file:
 
-``` bash
+```bash
 cp .env.example .env
 ```
 
-``` bash
-# Установка и сборка зависимостей
+```bash
+# Install and build dependencies
 yarn install
 
-# Запуск с горячей перезагрузкой на localhost:9080
+# Start with hot-reload at localhost:9080
 yarn run serve
 
-# Сборка production версии
+# Build production version
 yarn run build
 
-# Запуск ESLint --fix для JS/Vue файлов и компонентов в `src/`
+# Run ESLint --fix for JS/Vue files and components in `src/`
 yarn run lint:fix
 
-# Сборка под все платформы
+# Build for all platforms
 yarn run release
 
-# Сборка под MacOS
+# Build for MacOS
 yarn run release:mac
 
-# Сборка под Windows
+# Build for Windows
 yarn run release:win
 
-# Сборка под Linux
+# Build for Linux
 yarn run release:lin
 ```
+
+---
+
+#### English translation by: [TomerGamerTV](https://github.com/TomerGamerTV) 😉

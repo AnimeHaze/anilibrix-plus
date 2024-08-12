@@ -208,7 +208,7 @@ export default {
           if (!axios.isCancel(error)) {
             // Show error
             // Throw error
-            showAppError('Произошла ошибка при загрузке избранных релизов')
+            showAppError('There was an error loading featured releases')
           }
         } finally {
           commit(SET_LOADING, false)

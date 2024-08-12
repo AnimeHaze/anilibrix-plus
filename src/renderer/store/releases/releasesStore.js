@@ -185,7 +185,7 @@ export default {
           console.log(error)
           // Show error
           // Throw error
-          showAppError('Произошла ошибка при загрузке релизов')
+          showAppError('There was an error loading the releases')
         }
       } finally {
         commit(SET_RELEASES_LOADING, false)
@@ -224,7 +224,7 @@ export default {
           // Show app error
           // Return empty array
           console.log(error)
-          showAppError('Произошла ошибка при поиске релизов')
+          showAppError('An error occurred while searching for the releases')
           return []
         }
       }

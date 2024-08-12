@@ -75,11 +75,11 @@ export default {
   data () {
     return {
       teamProps: {
-        voice: 'Озвучили',
-        translator: 'Перевели',
-        decor: 'Оформили',
-        editing: 'Субтитры',
-        timing: 'Таймили'
+        voice: 'Voiced over',
+        translator: 'Translated',
+        decor: 'Editing',
+        editing: 'Subtitles',
+        timing: 'Timings'
       }
     }
   },

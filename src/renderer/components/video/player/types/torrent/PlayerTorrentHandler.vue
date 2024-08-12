@@ -104,7 +104,7 @@ export default {
           this.$emit('error', {
             source,
             referer: 'getPayload',
-            message: 'Не удалось определить источник воспроизведения',
+            message: 'Unable to determine playback source',
           })
         }
       })
@@ -156,7 +156,7 @@ export default {
         this.$emit('error', {
           payload,
           referer: 'processPayload',
-          message: 'Не удалось подключиться к источнику воспроизведения',
+          message: 'Failed to connect to playback source',
         })
 
       }

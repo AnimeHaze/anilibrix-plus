@@ -50,7 +50,7 @@ export function catGirlFetch(url, init = {}, timeout = 2000) {
       }),
 
     new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Timeout, mazafaka!')), timeout)
+      setTimeout(() => reject(new Error('Timeout, mazafaka!')), timeout) // 😂
     )
   ])
 }

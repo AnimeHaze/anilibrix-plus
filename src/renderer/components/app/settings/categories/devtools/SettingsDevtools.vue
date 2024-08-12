@@ -2,8 +2,8 @@
   <div ref="settings">
 
     <div class="pa-4 caption grey--text">
-      <div class="body-1">Инструменты отладки</div>
-      <div>Список инструментов для отладки приложения. Предназначены, в основном, для разработчиков</div>
+      <div class="body-1">Debugging tools</div>
+      <div>List of tools for debugging the application. Intended mainly for developers</div>
     </div>
 
     <v-card>
@@ -45,19 +45,19 @@ export default {
     settings () {
       return [
         {
-          title: 'Консоль приложения',
+          title: 'Application console',
           action: sendAppDevtoolsMainEvent,
         },
         {
-          title: 'Консоль торрент-сервера',
+          title: 'Torrent server console',
           action: sendAppDevtoolsTorrentEvent,
         },
         {
-          title: 'Добавить уведомление в хранилище',
+          title: 'Add notification to storage',
           action: () => this._setRelease(this._releases[0])
         },
         {
-          title: 'Показать данные хранилища в консоли',
+          title: 'Show storage data in console',
           action: () => console.log(this.$store.state),
         }
       ]

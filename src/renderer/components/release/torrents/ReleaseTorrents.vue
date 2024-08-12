@@ -11,7 +11,7 @@
           v-model="_torrentType"
           true-value="magnet"
           false-value="file"
-          label="Использовать magnet ссылки"
+          label="Use magnet links"
         ></v-checkbox>
       </v-list-item>
 

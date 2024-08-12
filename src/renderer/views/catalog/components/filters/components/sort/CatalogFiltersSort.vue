@@ -5,7 +5,7 @@
     hide-details
     item-text="title"
     item-value="value"
-    placeholder="Сортировка"
+    placeholder="Sorting"
     :value="_value"
     @input="_setFilterValue({filter: 'sort', value: $event})">
   </v-select>
@@ -20,11 +20,11 @@ export default {
     return {
       items: [
         {
-          title: 'По новизне',
+          title: 'By newest',
           value: 1
         },
         {
-          title: 'По популярности',
+          title: 'By popularity',
           value: 2
         },
       ]

@@ -8,13 +8,13 @@
 
       <v-col cols="12" sm="6" align-self="center">
         <v-card flat color="transparent">
-          <v-card-title>Ошибка при загрузке релизов</v-card-title>
+          <v-card-title>Error loading releases</v-card-title>
           <v-card-text>
-            <div>Возможно проблема связана с вашим соединением или API сервера</div>
-            <div>Попробуйте изменить настройки соединения или попробуйте позже</div>
+            <div>There may be a problem with your connection or the server API.</div>
+            <div>Please try changing your connection settings or try again later.</div>
           </v-card-text>
           <v-layout>
-            <v-btn @click="reload">Повторить</v-btn>
+            <v-btn @click="reload">Reload</v-btn>
           </v-layout>
         </v-card>
       </v-col>

@@ -125,11 +125,11 @@ export default {
     },
 
     didFailLoad () {
-      this.$toasted.error('Произошла ошибка при загрузке комментариев')
+      this.$toasted.error('There was an error loading comments.')
     },
 
     certError () {
-      this.$toasted.error('Произошла ошибка при загрузке комментариев. Ошибка с сертификатом')
+      this.$toasted.error('There was an error loading comments. Certificate error')
     }
   },
 

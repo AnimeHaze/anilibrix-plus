@@ -6,16 +6,16 @@
   >
     <v-card>
       <v-card-title class="text-h5">
-        ПРЕДУПРЕЖДЕНИЕ
+        WARNING
       </v-card-title>
       <v-card-text>
 
         <p>
-          Требуется согласие на передачу данных (сессионного идентификатора) на сторонний сервер для работы с снапшотами
+          Consent to the transfer of data (session identifier) ​​to a third -party server to work with snapshots is required
         </p>
 
         <p class="mt-1">
-          <b>Пароль учетной записи не раскрывается и не передается ни в каком виде</b>
+          <b>Your account password is not disclosed and is not transmitted in any form</b>
         </p>
       </v-card-text>
       <v-card-actions>
@@ -25,14 +25,14 @@
           text
           v-on:click="$emit('openSnapshots')"
         >
-          Я согласен
+          I agree
         </v-btn>
         <v-btn
           color="green darken-1"
           text
           v-on:click="visible = false"
         >
-          Нет, спасибо
+          No, thanks
         </v-btn>
       </v-card-actions>
     </v-card>

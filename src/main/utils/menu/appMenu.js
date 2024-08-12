@@ -5,29 +5,29 @@ import { Menu, shell } from 'electron'
 export const aboutTemplate = [
   {
     role: 'about',
-    label: 'О приложении'
+    label: 'About the application'
   },
   {
-    label: 'Telegram-канал',
+    label: 'Telegram Channel',
     click: () => shell.openExternal(meta.links.telegram)
   },
   {
-    label: 'Исходный код на GitHub',
+    label: 'Source code on GitHub',
     click: () => shell.openExternal(repository.url)
   },
   {
     type: 'separator'
   },
   {
-    label: 'Анилибрия',
+    label: 'Anilibria',
     click: () => shell.openExternal(meta.links.anilibria)
   },
   {
-    label: 'Канал не официальных релизов',
+    label: 'Channel of unofficial releases',
     click: () => shell.openExternal(meta.links.unofficial)
   },
   {
-    label: 'Поддержать проект',
+    label: 'Support the project',
     click: () => shell.openExternal(meta.links.donate)
   },
   {
@@ -35,11 +35,11 @@ export const aboutTemplate = [
   },
   {
     role: 'minimize',
-    label: 'Свернуть приложение'
+    label: 'Minimize application'
   },
   {
     role: 'quit',
-    label: 'Закрыть приложение'
+    label: 'Quit the application'
   }
 ]
 
@@ -93,26 +93,26 @@ export default class AppMenu {
         submenu: aboutTemplate
       },
       {
-        label: 'Отладка',
+        label: 'Debugging',
         submenu: [
           {
             role: 'toggledevtools',
-            label: 'Консоль приложения',
+            label: 'Application console',
             click: () => this._mainWindow.showDevTools()
           },
           {
-            label: 'Консоль торрент-сервер',
+            label: 'Console torrent server',
             click: () => this._torrentWindow.showDevTools()
           },
           {
             type: 'separator'
           },
           {
-            label: 'Добавить уведомление в хранилище',
+            label: 'Add notification to storage',
             click: () => store.dispatch('notifications/setRelease', store.state.releases.data[0])
           },
           {
-            label: 'Показать данные хранилища в консоли',
+            label: 'Show storage data in console',
             click: () => console.log(store.state)
           },
           {
@@ -120,12 +120,12 @@ export default class AppMenu {
           },
           {
             role: 'forcereload',
-            label: 'Перезагрузить приложение'
+            label: 'Restart the application'
           }
         ]
       },
       {
-        label: 'Окно',
+        label: 'Window',
         submenu: [
           { role: 'cut' },
           { role: 'copy' },

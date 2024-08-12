@@ -6,10 +6,10 @@
   >
     <v-card>
       <v-card-title className="text-h5">
-        ПРЕДУПРЕЖДЕНИЕ
+        WARNING
       </v-card-title>
       <v-card-text>
-        Вы действительно хотите удалить снапшот?
+        Do you really want to remove the snapshot?
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -19,7 +19,7 @@
           text
           v-on:click="deleteSnapshot"
         >
-          Да
+          Yes
         </v-btn>
         <v-btn
           :loading="loading"
@@ -27,7 +27,7 @@
           text
           v-on:click="visible = false"
         >
-          Отмена
+          Cancel
         </v-btn>
       </v-card-actions>
     </v-card>

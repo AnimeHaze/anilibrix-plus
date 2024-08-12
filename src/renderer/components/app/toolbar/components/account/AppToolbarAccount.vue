@@ -7,7 +7,7 @@
       <v-btn icon id="toolbar__login" @click="toLogin">
         <v-icon>mdi-account</v-icon>
       </v-btn>
-      <v-tooltip left key="login" activator="#toolbar__login">Авторизация</v-tooltip>
+      <v-tooltip left key="login" activator="#toolbar__login">Authorization</v-tooltip>
     </template>
 
 
@@ -58,7 +58,7 @@
 
           <!-- Logout -->
           <v-list-item @click="logout">
-            <v-list-item-subtitle>Выход</v-list-item-subtitle>
+            <v-list-item-subtitle>Exit</v-list-item-subtitle>
           </v-list-item>
         </v-list>
 
@@ -128,16 +128,16 @@ export default {
     statistics () {
       return [
         {
-          title: 'В избранном',
-          value: this.favorites ? stringsPluralize(this.favorites, ['релиз', 'релиза', 'релизов']) : 'Нет данных',
+          title: 'In favorites',
+          value: this.favorites ? stringsPluralize(this.favorites, ['release', 'release', 'releases']) : 'No data',
         },
         {
-          title: 'Просмотрено',
-          value: this.episodes ? stringsPluralize(this.episodes, ['эпизод', 'эпизода', 'эпизодов']) : 'Нет данных',
+          title: 'Viewed',
+          value: this.episodes ? stringsPluralize(this.episodes, ['episode', 'episode', 'episodes']) : 'No data',
         },
         {
-          title: 'Потрачено на просмотр',
-          value: this.hours > 0 ? stringsPluralize(this.hours, ['час', 'часа', 'часов']) : 'Нет данных',
+          title: 'Spent on viewing',
+          value: this.hours > 0 ? stringsPluralize(this.hours, ['hour', 'hours', 'hours']) : 'No data',
         }
       ]
     }

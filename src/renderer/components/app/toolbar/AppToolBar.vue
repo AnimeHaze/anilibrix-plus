@@ -3,19 +3,19 @@
       <!-- Releases -->
       <v-btn small text exact class="mr-1" height="38" :to="{name: 'releases'}">
         <v-icon size="18" class="mr-2">mdi-view-column</v-icon>
-        <span>Релизы</span>
+        <span>Releases</span>
       </v-btn>
 
       <!-- Catalog-->
       <v-btn small text exact class="mr-1" height="38" :to="{name: 'catalog'}">
         <v-icon size="18" class="mr-2">mdi-folder-text-outline</v-icon>
-        <span>Каталог</span>
+        <span>Catalog</span>
       </v-btn>
 
       <!-- Favorite -->
       <v-btn small text exact class="mr-4" height="38" :to="{name: 'favorites'}">
         <v-icon size="18" class="mr-2">mdi-star</v-icon>
-        <span>Избранное</span>
+        <span>Featured</span>
       </v-btn>
 
       <!-- Search-->
@@ -26,7 +26,7 @@
           <v-icon>mdi-dice-{{ dice }}</v-icon>
         </v-btn>
 
-        <v-tooltip left activator="#toolbar__rand">Случайный релиз</v-tooltip>
+        <v-tooltip left activator="#toolbar__rand">Random release</v-tooltip>
       </div>
 
       <update/>
@@ -74,7 +74,7 @@ export default {
       try {
         const {id, name} = await invokeRand()
         if (id === -1) {
-          this.$toasted.show('Функция не поддерживается выбранным API сервером', {type: 'error'})
+          this.$toasted.show('The function is not supported by the selected API server.', {type: 'error'})
           return
         }
         await this.$router.push('/release/' + id + '/' + name)

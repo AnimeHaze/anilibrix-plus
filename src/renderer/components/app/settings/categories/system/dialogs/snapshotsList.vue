@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-title>
-          <span class="text-h5">Список снапшотов</span>
+          <span class="text-h5">List of snapshots</span>
         </v-card-title>
         <v-card-text>
           <v-data-table
@@ -29,7 +29,7 @@
                   class="mb-2"
                   @click="createSnapshot"
                 >
-                  Новый снапшот
+                  New snapshot
                 </v-btn>
               </v-toolbar>
             </template>
@@ -68,7 +68,7 @@
             text
             @click="visible = false"
           >
-            Закрыть
+            Close
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -112,11 +112,11 @@ export default {
           value: 'id',
         },
         {
-          text: 'Дата и время создания',
+          text: 'Date and time of creation',
           value: 'date'
         },
         {
-          text: 'Действия',
+          text: 'Actions',
           sortable: false,
           value: 'actions'
         },

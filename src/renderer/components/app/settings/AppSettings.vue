@@ -13,7 +13,7 @@
 
     <!-- Header -->
     <v-toolbar flat class="shrink" color="#363636" :class="{'mt-9': !this.isMacOnFullscreen}">
-      <v-toolbar-title class="body-1">Настройки приложения</v-toolbar-title>
+      <v-toolbar-title class="body-1">Application settings</v-toolbar-title>
     </v-toolbar>
     <v-divider/>
 

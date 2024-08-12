@@ -73,7 +73,7 @@ const parseTorrent = ({
   } catch (error) {
     _sendError({
       torrentId: torrentId,
-      message: 'Произошла ошибка при парсинге торрент-файла',
+      message: 'An error occurred while parsing the torrent file',
       error
     })
   }
@@ -110,7 +110,7 @@ const startTorrent = ({
 
         // Select file with provided index
         if (file) torrent.select(file._startPiece, file._endPiece, false)
-        if (!file) throw 'Файл с таким порядковым номером не обнаружен'
+        if (!file) throw 'File with this serial number was not found'
 
         // Save torrent instance to store
         store.torrents[torrentId] = torrent
@@ -160,7 +160,7 @@ const startTorrent = ({
       } catch (error) {
         _sendError({
           torrentId,
-          message: 'Произошла ошибка при инициализации торрент-файла',
+          message: 'An error occurred while initializing the torrent file',
           error
         })
       }
@@ -168,7 +168,7 @@ const startTorrent = ({
   } else {
     _sendError({
       torrentId,
-      message: 'Торрент не найден'
+      message: 'Torrent not found'
     })
   }
 }
@@ -236,7 +236,7 @@ const destroyTorrent = ({ torrentId }) => {
   } catch (error) {
     _sendError({
       torrentId,
-      message: 'Произошла ошибка при остановке и уничтожении торрент-файла',
+      message: 'An error occurred while stopping and destroying the torrent file',
       error
     })
   }

@@ -6,10 +6,10 @@
   >
     <v-card>
       <v-card-title class="text-h5">
-        Создание снапшота
+        Snapshot creation
       </v-card-title>
       <v-card-text>
-        Вы действительно хотите создать снапшот?
+        Do you really want to create a snapshot?
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
@@ -19,7 +19,7 @@
           :loading="loading"
           v-on:click="createSnapshot"
         >
-          Да
+          Yes
         </v-btn>
         <v-btn
           color="green darken-1"
@@ -27,7 +27,7 @@
           :loading="loading"
           v-on:click="visible = false"
         >
-          Отмена
+          Cancel
         </v-btn>
       </v-card-actions>
     </v-card>

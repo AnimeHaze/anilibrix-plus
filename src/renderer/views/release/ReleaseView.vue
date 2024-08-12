@@ -4,7 +4,7 @@
     <!-- Release Card -->
     <card v-bind="{loading}" class="mb-2" :release="__release"/>
     <v-card v-if="franchises.length && !loadingAdditional" flat color="transparent" class="mb-6">
-      <v-card-title>Связанное</v-card-title>
+      <v-card-title>Related</v-card-title>
       <v-list three-line>
         <template v-for="(item, index) in franchises">
           <v-list-item :link="true" @click="router().push('/release/' + release.id + '/' + release.names.en)"
@@ -38,9 +38,9 @@
 
     <!-- Release Tabs -->
     <v-tabs v-if="!loading" v-model="tab" class="shrink mb-4" background-color="transparent">
-      <v-tab>Эпизоды</v-tab>
-      <v-tab>Комментарии</v-tab>
-      <v-tab v-if="torrents.length > 0">Торренты</v-tab>
+      <v-tab>Episodes</v-tab>
+      <v-tab>Comments</v-tab>
+      <v-tab v-if="torrents.length > 0">Torrents</v-tab>
     </v-tabs>
 
     <!-- Release Components -->
@@ -189,7 +189,7 @@ export default {
         this.loadingAdditional = false
       } catch (error) {
         console.error(error)
-        this.$toasted.error('Ошибка загрузки связанных данных')
+        this.$toasted.error('Error loading related data')
         this.loadingAdditional = false
       }
     },

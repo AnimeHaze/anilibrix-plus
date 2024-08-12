@@ -5,8 +5,8 @@
     <v-card class="mb-2">
       <v-list-item class="py-2" @click="_setSettingsShowSeen(!_show_seen)">
         <v-list-item-content>
-          <v-list-item-title>Просмотренные релизы</v-list-item-title>
-          <v-list-item-subtitle>Вы можете показать или скрыть уже просмотренные релизы</v-list-item-subtitle>
+          <v-list-item-title>Viewed releases</v-list-item-title>
+          <v-list-item-subtitle>You can show or hide already viewed releases</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-switch :input-value="_show_seen" @click="_setSettingsShowSeen"/>
@@ -18,8 +18,8 @@
     <v-card class="mb-2">
       <v-list-item class="py-2" @click="_setSettingsShowCompleted(!_show_completed)">
         <v-list-item-content>
-          <v-list-item-title>Только завершенные</v-list-item-title>
-          <v-list-item-subtitle>Вы можете показать или скрыть незаконченные релизы</v-list-item-subtitle>
+          <v-list-item-title>Just finished</v-list-item-title>
+          <v-list-item-subtitle>You can show or hide unfinished releases</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-switch :input-value="_show_completed" @click="_setSettingsShowCompleted"/>
@@ -32,15 +32,15 @@
     <v-card class="mb-2">
       <v-list-item class="py-2">
         <v-list-item-content>
-          <v-list-item-title>Сортировка</v-list-item-title>
-          <v-list-item-subtitle>Вы можете настроить способ сортировки релизов</v-list-item-subtitle>
+          <v-list-item-title>Sort</v-list-item-title>
+          <v-list-item-subtitle>You can customize the way releases are sorted</v-list-item-subtitle>
           <v-select
             outlined
             hide-details
             class="mt-4"
             item-text="title"
             item-value="value"
-            placeholder="Сортировка"
+            placeholder="Sorting"
             :items="sort"
             :value="_sort"
             @input="_setSettingsSort">
@@ -54,15 +54,15 @@
     <v-card>
       <v-list-item class="py-2">
         <v-list-item-content>
-          <v-list-item-title>Группировка</v-list-item-title>
-          <v-list-item-subtitle>Вы можете настроить способ группровки релизов</v-list-item-subtitle>
+          <v-list-item-title>Grouping</v-list-item-title>
+          <v-list-item-subtitle>You can customize the way releases are grouped</v-list-item-subtitle>
           <v-select
             outlined
             hide-details
             class="mt-4"
             item-text="title"
             item-value="value"
-            placeholder="Группировка"
+            placeholder="Grouping"
             :items="group"
             :value="_group"
             @input="_setSettingsGroup">
@@ -83,29 +83,29 @@ export default {
     return {
       sort: [
         {
-          title: 'По названию',
+          title: 'By name',
           value: 'title'
         },
         {
-          title: 'По популярности',
+          title: 'By popularity',
           value: 'rating'
         },
         {
-          title: 'По дате добавления в избранное',
+          title: 'By date added to favorites',
           value: 'original'
         },
         {
-          title: 'По дате обновления релизов',
+          title: 'By release update date',
           value: 'updates'
         }
       ],
       group: [
         {
-          title: 'Без группировки',
+          title: 'No grouping',
           value: 'original'
         },
         {
-          title: 'По годам',
+          title: 'By years',
           value: 'years'
         },
       ]

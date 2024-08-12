@@ -3,8 +3,8 @@
 
     <!-- Header-->
     <v-card flat color="transparent">
-      <v-card-title>Каталог релизов</v-card-title>
-      <v-card-subtitle>Вы можете выбрать жанры и года для более тонкой настройки списка релизов</v-card-subtitle>
+      <v-card-title>Catalog of releases</v-card-title>
+      <v-card-subtitle>You can select genres and years to further customize your release list.</v-card-subtitle>
     </v-card>
 
     <!-- Catalog Filters -->
