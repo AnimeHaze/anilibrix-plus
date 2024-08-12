@@ -141,6 +141,7 @@
         },
         {
           "target": "snap",
+          "packageName": "anilibrix-plus",
           "arch": [
             "x64"
           ]
