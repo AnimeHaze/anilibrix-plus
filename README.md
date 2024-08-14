@@ -4,7 +4,7 @@
 
 Версии до ext13 включительно подвержены проблеме API с 14.07.24
 
-Временное решение - https://t.me/anilibrix_plus/308
+Временное решение - https://t.me/anilibrix_plus/308 или же пред релизная сборка с фиксом https://github.com/AnimeHaze/anilibrix-plus/releases/tag/v1.4.3-ext.13.next
 
 ### Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
 
