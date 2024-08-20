@@ -25,7 +25,7 @@ export default class BaseProxy {
       url,
       method, ...parameters,
       headers,
-      timeout: 1000
+      timeout: 6000
     })
   }
 
