@@ -141,6 +141,12 @@ export default {
             password: this.password
           }
           const session = await this.$store.dispatchPromise('app/account/login', payload)
+
+
+          if (!session) {
+            return
+          }
+
           await Promise.allSettled([
             await invokeSafeStorageEncrypt('user.login', this.login),
             await invokeSafeStorageEncrypt('user.password', this.password)

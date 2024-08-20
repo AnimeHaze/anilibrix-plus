@@ -28,7 +28,13 @@ import axiosRetry from 'axios-retry';
 axiosRetry(axios, {
   retryDelay: 1500,
   retries: 10,
-  retryCondition: () => true
+  retryCondition: function (response) {
+    if (response.status === 404) return false
+    if (response.status === 401) return false
+
+    return true
+    // return axiosRetry.isNetworkOrIdempotentRequestError(response)
+  }
 })
 Vue.config.productionTip = false
 
