@@ -1,4 +1,5 @@
-.yarn
+.yarn/cache
+.yarn/install-state.gz
 .DS_Store
 /release/
 node_modules/
