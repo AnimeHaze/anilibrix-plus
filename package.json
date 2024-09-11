@@ -240,7 +240,7 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.4",
     "@babel/runtime": "^7.8.4",
-    "@types/discord-rpc": "^4.0.3",
+    "@types/discord-rpc": "^4.0.8",
     "ajv": "^6.5.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.6",
@@ -297,5 +297,8 @@
   "volta": {
     "node": "14.21.3",
     "yarn": "3.6.1"
+  },
+  "resolutions": {
+    "discord-rpc@^4.0.1": "patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch"
   }
 }

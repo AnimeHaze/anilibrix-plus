@@ -1810,10 +1810,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/discord-rpc@npm:^4.0.3":
-  version: 4.0.6
-  resolution: "@types/discord-rpc@npm:4.0.6"
-  checksum: 48633ff96de4eaf5b819a62ff40822e29d7a6ad90004a211a872c264d52f5f1531ce52dad5a5c2286f619247e569b43867886b541a7e512f858b6b730d616365
+"@types/discord-rpc@npm:^4.0.8":
+  version: 4.0.8
+  resolution: "@types/discord-rpc@npm:4.0.8"
+  dependencies:
+    "@types/events": "*"
+  checksum: 11d9fa003ce4c93773e5fde72ba10027a4515193c384dc248a382fb170133bb6f343eee5f86fd3e75ba2b9a7ebbf1f6b48c87263efc9889c57d32c970a33355a
+  languageName: node
+  linkType: hard
+
+"@types/events@npm:*":
+  version: 3.0.3
+  resolution: "@types/events@npm:3.0.3"
+  checksum: 50af9312fab001fd6bd4bb3ff65830f940877e6778de140a92481a0d9bf5f4853d44ec758a8800ef60e0598ac43ed1b5688116a3c65906ae54e989278d6c7c82
   languageName: node
   linkType: hard
 
@@ -2400,7 +2409,7 @@ __metadata:
     "@sentry/browser": ^6.13.2
     "@sentry/electron": ^2.5.4
     "@sentry/integrations": ^6.13.2
-    "@types/discord-rpc": ^4.0.3
+    "@types/discord-rpc": ^4.0.8
     ajv: ^6.5.0
     axios: ^1.7.2
     axios-retry: ^3.5.1
