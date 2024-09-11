@@ -6,12 +6,18 @@
       <!-- Avatar + Release main data -->
       <v-layout align-center class="my-4">
 
-        <!-- Poster -->
-        <img
-          class="mx-4 rounded-lg"
-          :src="poster"
-          style="max-width: 200px;"
-        >
+        <div style="display: flex; flex-direction: column">
+          <!-- Poster -->
+          <img
+            class="mx-4 rounded-lg"
+            :src="poster"
+            style="width: 230px;"
+          >
+
+          <v-btn label color="secondary" v-if="lastWatchedEpisode" @click="toVideo(release, lastWatchedEpisode)" class="mx-4 my-2 font-weight-black" style="width: 230px;">
+            Смотреть с {{ lastWatchedEpisode.id }} серии
+          </v-btn>
+        </div>
 
         <!-- Title -->
         <!-- Original Name + Genres -->
@@ -54,6 +60,8 @@
 
 import Loader from './components/loader'
 import Favorite from './../favorite'
+import __orderBy from "lodash/orderBy";
+import {toVideo} from "@utils/router/views";
 
 const props = {
   loading: {
@@ -67,6 +75,7 @@ const props = {
 }
 
 export default {
+  methods: {toVideo},
   props,
   components: {
     Loader,
@@ -84,6 +93,28 @@ export default {
     }
   },
   computed: {
+    /**
+     * Get watch data
+     *
+     * @return {*}
+     */
+    lastWatchedEpisode () {
+      let lastWatched = null
+      const episodes = this.$__get(this.release, 'episodes')
+      const ordered = __orderBy(episodes || [], ['id'], [s => s.episodes.order])
+      for (const ep of ordered) {
+        const { isSeen } = this.$store.getters['app/watch/getWatchedEpisode']({
+          release_id: this.release.id,
+          episode_id: ep.id
+        }) || {}
+
+        if (isSeen) {
+          lastWatched = ep
+        }
+      }
+
+      return lastWatched || (ordered[0] || null)
+    },
 
     /**
      * Get title
