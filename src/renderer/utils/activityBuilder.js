@@ -16,9 +16,12 @@ class ActivityBuilder {
     this.details = text
   }
 
+  setLargeImageText (text) {
+    this.largeImageText = text
+  }
+
   secondLine (text) {
     this.state = text
-    this.largeImageText = text
   }
 
   start (date) {

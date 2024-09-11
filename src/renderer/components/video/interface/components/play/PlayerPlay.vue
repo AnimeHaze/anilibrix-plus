@@ -142,6 +142,7 @@ export default {
       const a = new ActivityBuilder()
       a.setImage(this.release.poster)
       a.setActivityType(3)
+      a.setLargeImageText('AniLibrix plus t.me/anilibrix_plus')
       a.firstLine(`[${this.episode.id}/${this.episodes.length}] ` + this.title)
 
       a.secondLine(`${humanTime(this.player.currentTime)} / ${humanTime(this.player.duration)}` + (this.player.paused ? ' [ПАУЗА]' : ''))
