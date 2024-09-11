@@ -4,6 +4,10 @@ class ActivityBuilder {
     this.largeImageKey = 'libriatyan03'
   }
 
+  setActivityType (type) {
+    this.type = type
+  }
+
   setImage (img) {
     this.largeImageKey = img
   }
