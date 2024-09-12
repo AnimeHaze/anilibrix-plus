@@ -14,8 +14,26 @@
             style="width: 230px;"
           >
 
-          <v-btn label color="secondary" v-if="lastWatchedEpisode" @click="toVideo(release, lastWatchedEpisode)" class="mx-4 my-2 font-weight-black" style="width: 230px;">
-            Смотреть с {{ lastWatchedEpisode.id }} серии
+          <v-btn
+            label
+            color="secondary"
+            v-if="!lastWatchedEpisode.ep || (lastWatchedEpisode.ep && !lastWatchedEpisode.next)"
+            @click="toVideo(release, lastWatchedEpisode.first)"
+            class="mx-4 my-2 font-weight-black"
+            style="width: 230px;"
+          >
+            Начать смотреть
+          </v-btn>
+
+          <v-btn
+            label
+            color="secondary"
+            v-if="lastWatchedEpisode.ep && lastWatchedEpisode.next"
+            @click="toVideo(release, lastWatchedEpisode.next)"
+            class="mx-4 my-2 font-weight-black"
+            style="width: 230px;"
+          >
+            Смотреть с {{ lastWatchedEpisode.next.id }} серии
           </v-btn>
         </div>
 
@@ -99,21 +117,25 @@ export default {
      * @return {*}
      */
     lastWatchedEpisode () {
-      let lastWatched = null
+      let lastWatchedEpIndex = null
       const episodes = this.$__get(this.release, 'episodes')
       const ordered = __orderBy(episodes || [], ['id'], [s => s.episodes.order])
-      for (const ep of ordered) {
+      for (const i in ordered) {
         const { isSeen } = this.$store.getters['app/watch/getWatchedEpisode']({
           release_id: this.release.id,
-          episode_id: ep.id
+          episode_id: ordered[i].id
         }) || {}
 
         if (isSeen) {
-          lastWatched = ep
+          lastWatchedEpIndex = i
         }
       }
 
-      return lastWatched || (ordered[0] || null)
+      return {
+        ep: ordered[lastWatchedEpIndex],
+        first: ordered[0] || null,
+        next: ordered[+lastWatchedEpIndex + 1]
+      }
     },
 
     /**
