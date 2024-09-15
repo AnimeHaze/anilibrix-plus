@@ -8,7 +8,7 @@ import { meta, version } from '@package'
 import sentry from './utils/sentry'
 // Store
 import store, { getStore, setUserId } from '@store'
-import express from "express"
+import express from 'express'
 // Windows
 import { Main, Torrent } from './utils/windows'
 
@@ -41,22 +41,32 @@ import { openWindowInterceptor } from '@main/utils/windows/openWindowInterceptor
 import { consoleLogToFile } from '@main/utils/log-to-file';
 import { debounce } from 'lodash';
 import { catGirlFetch } from '../renderer/utils/fetch';
+import {getActiveOperaProxyURL, startOperaProxy, stopOperaProxy} from '@main/utils/opera-proxy';
 let proxyServer
 app.commandLine.appendSwitch('--no-sandbox')
 const proxyServerValue = store.state.app.settings.system.proxy
 console.log('Load proxy ', proxyServerValue)
 
 if (app.commandLine.hasSwitch('proxy-server') || proxyServerValue) {
-  proxyServer = app.commandLine.getSwitchValue('proxy-server') || proxyServerValue
+  proxyServer = app.commandLine.getSwitchValue('proxy-server') || proxyServerValue;
 
-  if (proxyServer) {
-    proxy.setConfig({
-      http: proxyServer,
-      https: proxyServer
-    })
+  (async () => {
+    if (proxyServer === 'http://opera') {
+      await startOperaProxy()
+      proxyServer = getActiveOperaProxyURL()
+    } else {
+      await stopOperaProxy()
+    }
 
-    proxy.start();
-  }
+    if (proxyServer) {
+      proxy.setConfig({
+        http: proxyServer === 'http://opera' ? getActiveOperaProxyURL() : proxyServer,
+        https: proxyServer === 'http://opera' ? getActiveOperaProxyURL() : proxyServer
+      })
+
+      proxy.start();
+    }
+  })();
 } else {
   proxy.system()
 }
@@ -197,10 +207,10 @@ app.on('ready', async () => {
 
   if (proxyServer) {
     mainWindow.webContents.session
-      .setProxy({ proxyRules: proxyServer })
+      .setProxy({ proxyRules: proxyServer === 'http://opera' ? getActiveOperaProxyURL() : proxyServer })
 
     torrentWindow.webContents.session
-      .setProxy({ proxyRules: proxyServer })
+      .setProxy({ proxyRules: proxyServer === 'http://opera' ? getActiveOperaProxyURL() : proxyServer })
   }
 
   if (process.env.NODE_ENV === 'development') mainWindow.webContents.openDevTools()
@@ -262,7 +272,24 @@ const appHandlers = () => {
   handleGetTitleV2()
   handleGetTitleV3()
   handleGetTitleV1New()
-  handleUpdateProxy((url) => {
+  handleUpdateProxy(async (url) => {
+    if (url === '') {
+      proxy.system()
+      const mainWindow = Main.getWindow()
+      const torrentWindow = Torrent.getWindow()
+
+      await stopOperaProxy()
+
+      mainWindow.webContents.session
+        .setProxy({ proxyRules: '' })
+
+      torrentWindow.webContents.session
+        .setProxy({ proxyRules: '' })
+
+      console.log('system proxy set')
+      return
+    }
+
     if (url) {
       try {
         new URL(url)
@@ -281,22 +308,31 @@ const appHandlers = () => {
 const setProxy = debounce(setProxyOrig, 2000)
 
 function setProxyOrig (url) {
-  proxy.setConfig({
-    http: url,
-    https: url
-  })
-  console.log('set proxy', url)
+  (async () => {
+    if (url === 'http://opera') {
+      await startOperaProxy()
+      url = getActiveOperaProxyURL()
+    } else {
+      await stopOperaProxy()
+    }
 
-  const mainWindow = Main.getWindow()
-  const torrentWindow = Torrent.getWindow()
+    proxy.setConfig({
+      http: url,
+      https: url
+    })
+    console.log('set proxy', url)
 
-  mainWindow.webContents.session
-    .setProxy({ proxyRules: url })
+    const mainWindow = Main.getWindow()
+    const torrentWindow = Torrent.getWindow()
 
-  torrentWindow.webContents.session
-    .setProxy({ proxyRules: url })
+    mainWindow.webContents.session
+      .setProxy({ proxyRules: url })
 
-  proxy.start()
+    torrentWindow.webContents.session
+      .setProxy({ proxyRules: url })
+
+    proxy.start()
+  })();
 }
 
 /**

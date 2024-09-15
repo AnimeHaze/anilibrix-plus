@@ -61,9 +61,19 @@
       </v-card-text>
     </v-card>
 
+    <v-card class="mt-2">
+      <v-list-item dense @click="toggleOperaProxy">
+        <v-list-item-title>Использовать Opera Proxy</v-list-item-title>
+        <v-list-item-action class="mr-2">
+          <v-switch :input-value="_proxy === 'http://opera'" @click="toggleOperaProxy"/>
+        </v-list-item-action>
+      </v-list-item>
+    </v-card>
+
     <v-card>
       <v-card-text class="mt-2">
         <v-text-field
+          v-if="_proxy !== 'http://opera'"
           outlined
           class="mb-2"
           :value="_proxy"
@@ -282,6 +292,15 @@ export default {
   },
 
   methods: {
+    toggleOperaProxy: function () {
+      if (this._proxy === 'http://opera') {
+        this.setProxyServer('')
+        console.log('opera proxy disabled')
+      } else {
+        this.setProxyServer('http://opera')
+        console.log('opera proxy enabled')
+      }
+    },
     setProxyServer: function ($event) {
       this._setProxy($event)
       invokeUpdateProxy($event)
