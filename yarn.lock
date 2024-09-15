@@ -2426,6 +2426,7 @@ __metadata:
     content-disposition-attachment: ^0.3.1
     copy-webpack-plugin: ^5.1.1
     cross-env: ^7.0.0
+    cross-spawn: ^7.0.3
     css-loader: ^3.4.2
     debug: ^4.3.6
     deepmerge: ^4.2.2
@@ -2459,6 +2460,7 @@ __metadata:
     flatted: ^3.0.2
     form-data: ^3.0.0
     fuse.js: ^3.4.6
+    get-port: ^5.0.0
     hls.js: 1.1.5
     html-webpack-plugin: ^3.2.0
     https-proxy-agent: ^5.0.0
@@ -6553,7 +6555,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-rpc@npm:^4.0.1":
+"discord-rpc@npm:4.0.1":
   version: 4.0.1
   resolution: "discord-rpc@npm:4.0.1"
   dependencies:
@@ -6564,6 +6566,20 @@ __metadata:
     register-scheme:
       optional: true
   checksum: f96e4e32751402c9a689b24eccfa319315995f8906bb86e167c6a94bc6466f3641b41f8a082ac5b4e92baa7cefdb3456e7c4d86ccd2d9373281c9a93b7335c56
+  languageName: node
+  linkType: hard
+
+"discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::locator=anilibrix%40workspace%3A.":
+  version: 4.0.1
+  resolution: "discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::version=4.0.1&hash=1a087c&locator=anilibrix%40workspace%3A."
+  dependencies:
+    node-fetch: ^2.6.1
+    register-scheme: "github:devsnek/node-register-scheme"
+    ws: ^7.3.1
+  dependenciesMeta:
+    register-scheme:
+      optional: true
+  checksum: 9e16782344dd65815916c0b5508d745aff64322054a07347fcc163173ee2da12670d4df012a7908037c6a43bf092aa6f029c8e0edcc274e1b4ca049838212b07
   languageName: node
   linkType: hard
 
@@ -8620,6 +8636,13 @@ __metadata:
     has-proto: ^1.0.1
     has-symbols: ^1.0.3
   checksum: 5b61d88552c24b0cf6fa2d1b3bc5459d7306f699de060d76442cce49a4721f52b8c560a33ab392cf5575b7810277d54ded9d4d39a1ea61855619ebc005aa7e5f
+  languageName: node
+  linkType: hard
+
+"get-port@npm:^5.0.0":
+  version: 5.1.1
+  resolution: "get-port@npm:5.1.1"
+  checksum: 0162663ffe5c09e748cd79d97b74cd70e5a5c84b760a475ce5767b357fb2a57cb821cee412d646aa8a156ed39b78aab88974eddaa9e5ee926173c036c0713787
   languageName: node
   linkType: hard
 
