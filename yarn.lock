@@ -2396,9 +2396,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anilibrix@workspace:.":
+"anilibrix-plus@workspace:.":
   version: 0.0.0-use.local
-  resolution: "anilibrix@workspace:."
+  resolution: "anilibrix-plus@workspace:."
   dependencies:
     "@babel/core": ^7.8.4
     "@babel/plugin-transform-runtime": ^7.8.3
@@ -6569,9 +6569,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::locator=anilibrix%40workspace%3A.":
+"discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::locator=anilibrix-plus%40workspace%3A.":
   version: 4.0.1
-  resolution: "discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::version=4.0.1&hash=1a087c&locator=anilibrix%40workspace%3A."
+  resolution: "discord-rpc@patch:discord-rpc@npm%3A4.0.1#./.yarn/patches/discord-rpc-npm-4.0.1-47d3cb5664.patch::version=4.0.1&hash=1a087c&locator=anilibrix-plus%40workspace%3A."
   dependencies:
     node-fetch: ^2.6.1
     register-scheme: "github:devsnek/node-register-scheme"

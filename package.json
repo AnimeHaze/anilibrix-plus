@@ -1,6 +1,6 @@
 {
-  "name": "anilibrix",
-  "version": "v1.4.3-ext.13",
+  "name": "anilibrix-plus",
+  "version": "v2.0.0",
   "author": {
     "name": "Anilibria",
     "email": "anilibria@protonmail.com",
@@ -32,7 +32,7 @@
     "operaproxy-download": "OPERA_PROXY_RELEASE_URL=https://github.com/Snawoot/opera-proxy/releases/download/v1.3.1 && npm run operaproxy-mac-amd64 && npm run operaproxy-mac-arm64 && npm run operaproxy-linux-386 && npm run operaproxy-linux-amd64 && npm run operaproxy-linux-arm64 && npm run operaproxy-linux-arm64 && npm run operaproxy-windows-386 && npm run operaproxy-windows-amd64 && npm run operaproxy-windows-arm64"
   },
   "meta": {
-    "name": "AniLibrix",
+    "name": "AniLibrix-Plus",
     "links": {
       "github": "https://github.com/AnimeHaze/anilibrix",
       "donate": "https://www.anilibria.tv/pages/donate.php",
@@ -42,7 +42,7 @@
     }
   },
   "build": {
-    "productName": "AniLibrix Plus",
+    "productName": "AniLibrixPlus",
     "artifactName": "AniLibrixPlus-${os}-${arch}-${version}.${ext}",
     "appId": "com.anilibria.anilibrix",
     "directories": {
@@ -154,7 +154,7 @@
           "releaseType": "release"
         },
         {
-          "repo": "anilibrix",
+          "repo": "anilibrix-plus",
           "channels": [
             "stable"
           ],
