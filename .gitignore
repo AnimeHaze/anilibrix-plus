@@ -1,3 +1,4 @@
+build/**/opera-proxy*
 .yarn/cache
 .yarn/install-state.gz
 .DS_Store
