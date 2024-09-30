@@ -44,7 +44,7 @@
   "build": {
     "productName": "AniLibrixPlus",
     "artifactName": "AniLibrixPlus-${os}-${arch}-${version}.${ext}",
-    "appId": "com.animehaze.anilibrix-plus",
+    "appId": "com.anilibria.anilibrix",
     "directories": {
       "output": "release"
     },
