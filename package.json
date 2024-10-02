@@ -17,19 +17,11 @@
     "build": "node .electron-vue/build.js",
     "serve": "node .electron-vue/dev-runner.js",
     "release": "yarn build && electron-builder -wml -c.compression=store --publish never",
-    "release:mac": "yarn build && electron-builder -m -c.compression=store --publish never",
-    "release:linux": "yarn build && electron-builder -l -c.compression=store --publish never",
-    "release:windows": "yarn build && electron-builder -w -c.compression=maximum --publish never",
+    "release:mac": "yarn run operaproxy-download && yarn build && electron-builder -m -c.compression=store --publish never",
+    "release:linux": "yarn run operaproxy-download && yarn build && electron-builder -l -c.compression=store --publish never",
+    "release:windows": "yarn run operaproxy-download && yarn build && electron-builder -w -c.compression=maximum --publish never",
     "lint:fix": "eslint --ext .js,.vue -f ./node_modules/eslint-friendly-formatter --fix src",
-    "operaproxy-mac-amd64": "curl -L -o ./build/mac/x64/opera-proxy \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.darwin-amd64",
-    "operaproxy-mac-arm64": "curl -L -o ./build/mac/arm64/opera-proxy \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.darwin-amd64",
-    "operaproxy-linux-386": "curl -L -o ./build/linux/ia32/opera-proxy \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.linux-386",
-    "operaproxy-linux-amd64": "curl -L -o ./build/linux/x64/opera-proxy \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.linux-amd64",
-    "operaproxy-linux-arm64": "curl -L -o ./build/linux/arm64/opera-proxy \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.linux-arm64",
-    "operaproxy-windows-386": "curl -L -o ./build/win/ia32/opera-proxy.exe \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.windows-386.exe",
-    "operaproxy-windows-amd64": "curl -L -o ./build/win/x64/opera-proxy.exe \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.windows-amd64.exe",
-    "operaproxy-windows-arm64": "curl -L -o ./build/win/arm64/opera-proxy.exe \"\"$OPERA_PROXY_RELEASE_URL\"\"/opera-proxy.windows-arm.exe",
-    "operaproxy-download": "OPERA_PROXY_RELEASE_URL=https://github.com/Snawoot/opera-proxy/releases/download/v1.3.1 && npm run operaproxy-mac-amd64 && npm run operaproxy-mac-arm64 && npm run operaproxy-linux-386 && npm run operaproxy-linux-amd64 && npm run operaproxy-linux-arm64 && npm run operaproxy-linux-arm64 && npm run operaproxy-windows-386 && npm run operaproxy-windows-amd64 && npm run operaproxy-windows-arm64"
+    "operaproxy-download": "./scripts/opera-proxy.sh"
   },
   "meta": {
     "name": "AniLibrix",
