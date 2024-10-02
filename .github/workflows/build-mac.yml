@@ -73,6 +73,9 @@ jobs:
       - name: Install dependencies
         run: yarn
 
+      - name: Download opera proxy
+        run: yarn run operaproxy-download
+
       - name: Run build
         run: npm run release:mac
 
