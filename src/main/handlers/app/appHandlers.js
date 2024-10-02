@@ -219,7 +219,8 @@ export const invokeRand = () => ipcRenderer.invoke(APP_RAND)
  */
 export const handleRand = () => {
   ipcMain.handle(APP_RAND, async (event) => {
-    const endpoint = require('@store/index').default?.state?.app?.settings?.system?.apiEndpoint
+    const endpoint = require('@store/index').default?.state?.app?.settings?.system?.api._endpoint
+
     const { hostname } = new URL(endpoint)
     const parts = hostname.split('.')
     if (parts.length > 2) {
@@ -231,15 +232,12 @@ export const handleRand = () => {
       console.log('Rand:', data.id)
       return { id: data.id, name: data.names.en }
     } catch (e) {
-      if (e.response.status === 404) {
-        const { data: { data: { code } } } = await axios.post(`https://${hostname}/public/api/index.php`, new URLSearchParams({ query: 'random_release' }))
-        const { data: { data: { id, names } } } = await axios.post(`https://${hostname}/public/api/index.php`, new URLSearchParams({
-          query: 'release',
-          code: code
-        }))
-        return { id: id, name: names.pop() }
-      }
-      throw e
+      const { data: { data: { code } } } = await axios.post(`https://${hostname}/public/api/index.php`, new URLSearchParams({ query: 'random_release' }))
+      const { data: { data: { id, names } } } = await axios.post(`https://${hostname}/public/api/index.php`, new URLSearchParams({
+        query: 'release',
+        code: code
+      }))
+      return { id: id, name: names.pop() }
     }
   })
 }
@@ -276,7 +274,7 @@ export const handleGetTitleV2 = () => {
 export const invokeGetTitleV1New = (url) => ipcRenderer.invoke(APP_GET_TITLE_V1_NEW, url)
 export const handleGetTitleV1New = () => {
   ipcMain.handle(APP_GET_TITLE_V1_NEW, async (event, rId) => {
-    return await axios.get(`https://anilibria.top/api/v1/anime/releases/` + rId).then(x => x.data)
+    return await axios.get('https://anilibria.top/api/v1/anime/releases/' + rId).then(x => x.data)
   })
 }
 
