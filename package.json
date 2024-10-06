@@ -153,7 +153,8 @@
         "audio-playback",
         "pulseaudio",
         "opengl",
-        "system-observe"
+        "system-observe",
+        "screen-inhibit-control"
       ],
       "publish": [
         {
