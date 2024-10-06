@@ -140,6 +140,21 @@
       ]
     },
     "snap": {
+      "plugs": [
+        "desktop",
+        "desktop-legacy",
+        "home",
+        "x11",
+        "wayland",
+        "unity7",
+        "browser-support",
+        "network",
+        "gsettings",
+        "audio-playback",
+        "pulseaudio",
+        "opengl",
+        "system-observe"
+      ],
       "publish": [
         {
           "provider": "github",
