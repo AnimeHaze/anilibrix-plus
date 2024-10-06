@@ -19,7 +19,6 @@ wget -O ./build/linux/arm64/opera-proxy "$OPERA_PROXY_RELEASE_URL/opera-proxy.li
 wget -O ./build/win/ia32/opera-proxy.exe "$OPERA_PROXY_RELEASE_URL/opera-proxy.windows-386.exe"
 wget -O ./build/win/x64/opera-proxy.exe "$OPERA_PROXY_RELEASE_URL/opera-proxy.windows-amd64.exe"
 wget -O ./build/win/arm64/opera-proxy.exe "$OPERA_PROXY_RELEASE_URL/opera-proxy.windows-arm.exe"
-
 chmod +x ./build/mac/x64/opera-proxy
 chmod +x ./build/mac/arm64/opera-proxy
 chmod +x ./build/linux/ia32/opera-proxy
