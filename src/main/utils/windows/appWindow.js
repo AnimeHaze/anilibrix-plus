@@ -63,8 +63,7 @@ export default class Window {
         x: mainWindowState.x,
         y: mainWindowState.y,
         width: mainWindowState.width,
-        height: mainWindowState.height,
-        fullscreen: false
+        height: mainWindowState.height
       })
 
       this._window = new BrowserWindow(opts)
