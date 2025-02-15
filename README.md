@@ -1,10 +1,7 @@
 # AniLibrix Unoffical
 
-# АХТУНГ!!!
-
-Версии до ext13 включительно подвержены проблеме API с 14.07.24
-
-Временное решение - https://t.me/anilibrix_plus/308 или релизная сборка с фиксом [v1.4.3-ext.13.next](https://t.me/anilibrix_plus/310)
+Чат Telegram: https://t.me/anilibrix_plus_chat
+Канал с обновлениями: https://t.me/anilibrix_plus
 
 ### Десктопный аниме-кинотеатр Анилибрии для любого вашего компьютера.
 
